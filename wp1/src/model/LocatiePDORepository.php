@@ -51,9 +51,9 @@ class LocatiePDORepository implements locatieRepository
             $id = $locatie->getId();
             $name = $locatie->getNaam();
 
-            $statement = $this->connection->prepare('UPDATE locatie SET id=?,naam=?');
-            $statement->bindParam(1, $id, \PDO::PARAM_INT);
-            $statement->bindParam(2, $name, \PDO::PARAM_STR);
+            $statement = $this->connection->prepare('UPDATE locatie SET naam=? WHERE id=?');
+            $statement->bindParam(1, $name, \PDO::PARAM_STR);
+            $statement->bindParam(2, $id, \PDO::PARAM_INT);
             $statement->execute();
             return $locatie;
         } catch (\Exception $exception) {
