@@ -18,6 +18,11 @@ class LocatieController
         $this->view = $view;
     }
 
+    public function handleGetAll() {
+        $locaties = $this->handleGetAll();
+        $this->view->show(['toShow' => $locaties]);
+    }
+
     public function handleGetById(int $id) {
         $locatie = $this->locatieRepo->getById($id);
         $this->view->show(['toShow' => $locatie]);

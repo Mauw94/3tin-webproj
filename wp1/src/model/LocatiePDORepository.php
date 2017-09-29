@@ -12,6 +12,23 @@ class LocatiePDORepository implements locatieRepository
         $this->connection = $connection;
     }
 
+    public function getAll()
+    {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM locatie");
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            if ($results > 0) {
+                return $results;
+            } else {
+                return null;
+            }
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
     public function getById(int $id)
     {
         try {
