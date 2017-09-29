@@ -45,7 +45,6 @@ class locatiePDORepository implements locatieRepository
         }
     }
 
-
     public function updateLocatie(Locatie $locatie)
     {
         try {
