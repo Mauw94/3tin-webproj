@@ -3,7 +3,7 @@
 namespace model;
 
 
-class probleemmeldingRepository
+class ProbleemmeldingRepository
 {
 
 }

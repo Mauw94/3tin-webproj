@@ -3,7 +3,7 @@
 namespace model;
 
 
-class statusmelding
+class Statusmelding
 {
     private $id;
     private $locatieId;

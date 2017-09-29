@@ -13,7 +13,7 @@ try {
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     $requestBody = file_get_contents("php://input");
 
-    $dbinfo = json_encode(file_get_contents("dbconnection.json"), true);
+    $dbinfo = json_decode(file_get_contents("dbconnection.json"), true);
     $pdo = new PDO($dbinfo['dsn'], $dbinfo['username'], $dbinfo['password']);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
