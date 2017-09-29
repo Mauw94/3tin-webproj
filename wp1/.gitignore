@@ -43,3 +43,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+vendor/doctrine/dbal/lib/vendor/
+vendor/doctrine/orm/docs/en/_theme/
+vendor/doctrine/orm/lib/vendor/
