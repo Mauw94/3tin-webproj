@@ -18,16 +18,33 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
         $this->connection = $connection;
     }
 
+    public function getAll()
+    {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM probleemmelding");
+            $statement->execute();
+            $probleemMeldingen = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            if ($probleemMeldingen > 0) {
+                return $probleemMeldingen;
+            } else {
+                return null;
+            }
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
     public function getById(int $id)
     {
         try {
             $statement = $this->connection->prepare("SELECT * FROM probleemmelding WHERE id=?");
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->execute();
-            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $probleemMelding = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-            if ($result > 0) {
-            return new ProbleemMelding($result[0]['id'],$result[1]['locatieid'],$result[2]['probleem'], $result[3]['datum'], $result[4]['afgehandeld']);
+            if ($probleemMelding > 0) {
+            return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[1]['locatieid'],$probleemMelding[2]['probleem'], $probleemMelding[3]['datum'], $probleemMelding[4]['afgehandeld']);
             } else {
                 return null;
             }
@@ -83,7 +100,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $statement = $this->connection->prepare('SELECT * FROM probleemmelding WHERE afgehandeld = TRUE ');
             $statement->execute();
 
-            $afgehandeldeProbleemMeldingen = $statement->fetchAll();
+            $afgehandeldeProbleemMeldingen = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $afgehandeldeProbleemMeldingen;
         } catch (\Exception $exception) {
             return null;

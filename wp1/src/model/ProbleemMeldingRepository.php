@@ -5,6 +5,8 @@ namespace model;
 
 interface ProbleemMeldingRepository
 {
+    public function getAll();
+
     public function getById(int $id);
 
     public function addProbleemMelding(ProbleemMelding $probleemMelding);
