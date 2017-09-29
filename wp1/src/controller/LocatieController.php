@@ -6,7 +6,7 @@ namespace controller;
 use model\locatiePDORepository;
 use view\View;
 
-class locatieController
+class LocatieController
 {
     private $locatieRepo;
     private $view;

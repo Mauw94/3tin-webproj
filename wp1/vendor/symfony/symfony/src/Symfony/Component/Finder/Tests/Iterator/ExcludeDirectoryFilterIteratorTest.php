@@ -37,7 +37,7 @@ class ExcludeDirectoryFilterIteratorTest extends RealIteratorTestCase
             '.foo/bar',
             '.git',
             'test.py',
-            'test.php',
+            'LocatieController.php',
             'toto',
             'toto/.git',
             'foo bar',
@@ -52,7 +52,7 @@ class ExcludeDirectoryFilterIteratorTest extends RealIteratorTestCase
             'test.py',
             'foo',
             'foo/bar.tmp',
-            'test.php',
+            'LocatieController.php',
             'toto',
             'toto/.git',
             'foo bar',
@@ -67,7 +67,7 @@ class ExcludeDirectoryFilterIteratorTest extends RealIteratorTestCase
             'test.py',
             'foo',
             'foo/bar.tmp',
-            'test.php',
+            'LocatieController.php',
             'foo bar',
         );
 
