@@ -3,7 +3,7 @@
 namespace model;
 
 
-interface LocatieRepository
+interface locatieRepository
 {
 
     public function getAll();

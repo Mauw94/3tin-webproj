@@ -3,7 +3,7 @@
 namespace model;
 
 
-class LocatiePDORepository implements locatieRepository
+class locatiePDORepository implements locatieRepository
 {
     private $connection = null;
 
@@ -61,6 +61,7 @@ class LocatiePDORepository implements locatieRepository
             return null;
         }
     }
+
 
     public function updateLocatie(Locatie $locatie)
     {

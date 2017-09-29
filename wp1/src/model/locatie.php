@@ -3,7 +3,7 @@
 namespace model;
 
 
-class Locatie
+class locatie
 {
     private $id;
     private $naam;
