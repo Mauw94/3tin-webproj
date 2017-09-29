@@ -1,5 +1,5 @@
 {
-  "dsn": "url=localhost;dbname=web-project3tin",
-  "username": "",
+  "dsn": "mysql:host=localhost;port=3306;dbname=web-project3tin",
+  "username": "root",
   "password": ""
 }
