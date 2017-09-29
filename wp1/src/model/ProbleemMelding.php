@@ -3,26 +3,30 @@
 namespace model;
 
 
-class probleemmelding
+class ProbleemMelding
 {
     private $id;
     private $locatieId;
     private $probleem;
-    private $datumAfgehandeld;
+    private $datum;
+    private $afgehandeld;
+
 
     /**
-     * probleemmelding constructor.
+     * probleemMelding constructor.
      * @param $id
      * @param $locatieId
      * @param $probleem
-     * @param $datumAfgehandeld
+     * @param $datum
+     * @param $afgehandeld
      */
-    public function __construct($id, $locatieId, $probleem, $datumAfgehandeld)
+    public function __construct($id, $locatieId, $probleem, $datum, $afgehandeld)
     {
         $this->id = $id;
         $this->locatieId = $locatieId;
         $this->probleem = $probleem;
-        $this->datumAfgehandeld = $datumAfgehandeld;
+        $this->datum = $datum;
+        $this->afgehandeld=$afgehandeld;
     }
 
     /**
@@ -76,17 +80,32 @@ class probleemmelding
     /**
      * @return mixed
      */
-    public function getDatumAfgehandeld()
+    public function getDatum()
     {
-        return $this->datumAfgehandeld;
+        return $this->datum;
     }
 
     /**
-     * @param mixed $datumAfgehandeld
+     * @param mixed $datum
      */
-    public function setDatumAfgehandeld($datumAfgehandeld)
+    public function setDatum($datum)
     {
-        $this->datumAfgehandeld = $datumAfgehandeld;
+        $this->datum = $datum;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAfgehandeld()
+    {
+        return $this->afgehandeld;
+    }
+
+    /**
+     * @param mixed $afgehandeld
+     */
+    public function setAfgehandeld($afgehandeld)
+    {
+        $this->afgehandeld = $afgehandeld;
+    }
 }

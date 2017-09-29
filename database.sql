@@ -34,7 +34,7 @@ CREATE TABLE `locatie` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `probleemmelding`
+-- Tabelstructuur voor tabel `probleemMelding`
 --
 
 CREATE TABLE `probleemmelding` (
@@ -59,7 +59,7 @@ CREATE TABLE `statusmelding` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexen voor geï¿½xporteerde tabellen
 --
 
 --
@@ -69,7 +69,7 @@ ALTER TABLE `locatie`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `probleemmelding`
+-- Indexen voor tabel `probleemMelding`
 --
 ALTER TABLE `probleemmelding`
   ADD PRIMARY KEY (`id`);
@@ -81,7 +81,7 @@ ALTER TABLE `statusmelding`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT voor geï¿½xporteerde tabellen
 --
 
 --
@@ -90,7 +90,7 @@ ALTER TABLE `statusmelding`
 ALTER TABLE `locatie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT voor een tabel `probleemmelding`
+-- AUTO_INCREMENT voor een tabel `probleemMelding`
 --
 ALTER TABLE `probleemmelding`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
