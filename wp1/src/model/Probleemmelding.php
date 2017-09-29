@@ -3,7 +3,7 @@
 namespace model;
 
 
-class probleemmelding
+class Probleemmelding
 {
     private $id;
     private $locatieId;

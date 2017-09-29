@@ -3,7 +3,7 @@
 namespace model;
 
 
-interface locatieRepository
+interface LocatieRepository
 {
     public function getById(int $id);
 
