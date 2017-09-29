@@ -9,7 +9,7 @@
 namespace model;
 
 
-class ProbleemMeldingPDORepository
+class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
 {
     private $connection = null;
 
@@ -55,4 +55,38 @@ class ProbleemMeldingPDORepository
         }
     }
 
+    public function updateProbleemmelding(ProbleemMelding $probleemMelding)
+    {
+        try {
+            $id = $probleemMelding->getId();
+            $locatieId = $probleemMelding->getLocatieId();
+            $probleem = $probleemMelding->getProbleem();
+            $datum = $probleemMelding->getDatum();
+            $afgehandeld = $probleemMelding->getAfgehandeld();
+            $statement = $this->connection->prepare('UPDATE probleemmelding SET locatieid=?,probleem=?,datum=?,afgehandeld=? WHERE id=?');
+            $statement->bindParam(1, $locatieId, \PDO::PARAM_INT);
+            $statement->bindParam(2, $probleem, \PDO::PARAM_STR);
+            $statement->bindParam(3, $datum, \PDO::PARAM_STR);
+            $statement->bindParam(4, $afgehandeld, \PDO::PARAM_BOOL);
+            $statement->bindParam(5, $id, \PDO::PARAM_INT);
+            $statement->execute();
+
+            return $probleemMelding;
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    public function getAfgehandeldeProbleemMeldingen()
+    {
+        try {
+            $statement = $this->connection->prepare('SELECT * FROM probleemmelding WHERE afgehandeld = TRUE ');
+            $statement->execute();
+
+            $afgehandeldeProbleemMeldingen = $statement->fetchAll();
+            return $afgehandeldeProbleemMeldingen;
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
 }
