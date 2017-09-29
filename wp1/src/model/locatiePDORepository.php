@@ -32,14 +32,14 @@ class locatiePDORepository implements locatieRepository
 
     public function addLocatie(Locatie $locatie)
     {
-       try { $id = $locatie->getId();
-        $name = $locatie->getNaam();
-        $statement = $this->connection->prepare('INSERT INTO locatie(id,name) VALUES(?,?)');
-        $statement->bindParam(1, $id, \PDO::PARAM_INT);
-        $statement->bindParam(2, $firstName);
-        $statement->bindParam(3, $lastName);
-        $statement->execute();
-        return $locatie;
+       try {
+           $id = $locatie->getId();
+            $name = $locatie->getNaam();
+            $statement = $this->connection->prepare('INSERT INTO locatie(id, naam) VALUES(?,?)');
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->bindParam(2, $name, \PDO::PARAM_STR);
+             $statement->execute();
+            return $locatie;
     } catch (\Exception $exception) {
             return null;
         }
@@ -48,12 +48,30 @@ class locatiePDORepository implements locatieRepository
 
     public function updateLocatie(Locatie $locatie)
     {
+        try {
+            $id = $locatie->getId();
+            $name = $locatie->getNaam();
 
+            $statement = $this->connection->prepare('UPDATE locatie SET id=?,naam=?');
+            $statement->bindParam(1, $id, \PDO::PARAM_INT;
+            $statement->bindParam(2, $name, \PDO::PARAM_STR);
+            $statement->execute();
+            return $locatie;
+        } catch (\Exception $exception) {
+            return null;
+        }
     }
 
-    public function deleteLocatie(int $id)
+    public function deleteLocatie(int $locatieId)
     {
-
+        try {
+            $id = $locatieId;
+            $statement = $this->connection->prepare('DELETE FROM locatie WHERE id=?');
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->execute();
+        } catch (\Exception $exception) {
+            return null;
+        }
     }
 
 }
