@@ -3,7 +3,7 @@
 namespace model;
 
 
-class locatiePDORepository implements locatieRepository
+class LocatiePDORepository implements locatieRepository
 {
     private $connection = null;
 
