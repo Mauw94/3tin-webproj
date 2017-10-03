@@ -3,7 +3,7 @@
 namespace model;
 
 
-class statusmelding
+class statusMelding
 {
     private $id;
     private $locatieId;
@@ -11,7 +11,7 @@ class statusmelding
     private $datum;
 
     /**
-     * statusmelding constructor.
+     * statusMelding constructor.
      * @param $id
      * @param $locatieId
      * @param $status
