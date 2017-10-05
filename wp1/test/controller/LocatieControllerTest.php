@@ -38,4 +38,57 @@ class LocatieControllerTest extends PHPUnit_Framework_TestCase
         $locatieController->handleGetById($locatie->getId());
         $this->expectOutputString(sprintf("%s", json_encode($locatie)));
     }
+
+    public function test_handleAddLocatie()
+    {
+        $locatieJson = '{"id":0, "naam":"test"}';
+        $locatie = json_decode($locatieJson);
+
+        $this->mockLocatieRepo->expects($this->atLeastOnce())
+            ->method('handleAddLocatie')
+            ->will($this->returnValue($locatie));
+
+        $this->mockJsonView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object) {
+                $event = $object['toShow'];
+                printf("%s", json_encode($event));
+            }));
+
+        $locatieController = new LocatieController($this->mockLocatieRepo, $this->mockJsonView);
+        $locatieController->handleAddLocatie($locatieJson);
+        $this->expectOutputString(sprintf("%s", json_encode($locatie)));
+    }
+
+    public function test_handleUpdateLocatie()
+    {
+        $locatieJson = '{"id":0, "naam":"test"}';
+        $locatie = json_decode($locatieJson);
+
+        $this->mockLocatieRepo->expects($this->atLeastOnce())
+            ->method('handleUpdateLocatie')
+            ->will($this->returnValue($locatie));
+
+        $this->mockJsonView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object) {
+                $event = $object['toShow'];
+                printf("%s", json_encode($event));
+            }));
+
+        $locatieController = new LocatieController($this->mockLocatieRepo, $this->mockJsonView);
+        $locatieController->handleUpdateLocatie($locatieJson);
+        $this->expectOutputString(sprintf("%s", json_encode($locatie)));
+    }
+
+    public function test_handleDeleteLocatie()
+    {
+        $this->mockLocatieRepo->expects($this->atLeastOnce())
+            ->method('handleDeleteLocatie')
+            ->will($this->returnValue(null));
+
+        $locatieController = new LocatieController($this->mockLocatieRepo, $this->mockJsonView);
+        $locatieController->handleDeleteLocatie(0);
+        $this->expectOutputStrin('');
+    }
 }
