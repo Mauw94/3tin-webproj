@@ -11,10 +11,16 @@ namespace model;
 
 class StatusMeldingPDORepository implements StatusMelidingRepository
 {
+    private $connection = null;
+
+    public function __construct(\PDO $connection)
+    {
+        $this->connection = $connection;
+    }
 
     public function getAll()
     {
-        // TODO: Implement getAll() method.
+
     }
 
     public function getById(int $id)
