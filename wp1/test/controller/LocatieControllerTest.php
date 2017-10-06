@@ -3,7 +3,10 @@
 use \model\Locatie;
 use \controller\LocatieController;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 
+=======
+>>>>>>> f0e4ec14f89e19aa1b62ea9663ec35b221658e6d
 class LocatieControllerTest extends TestCase
 {
     private $mockLocatieRepo;
