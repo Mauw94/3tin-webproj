@@ -2,7 +2,8 @@
 
 use \model\LocatiePDORepository;
 use \model\Locatie;
-use PHPUnit\Framework\TestCase;
+use \PHPUnit\Framework\TestCase;
+
 class LocatiePDORepositoryTest extends TestCase
 {
     private $pdoLocatieRepository;
