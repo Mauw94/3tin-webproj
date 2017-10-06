@@ -1,7 +1,7 @@
 <?php
 
-use \model\Locatie;
-use \controller\LocatieController;
+use model\Locatie;
+use controller\LocatieController;
 use PHPUnit\Framework\TestCase;
 class LocatieControllerTest extends TestCase
 {
