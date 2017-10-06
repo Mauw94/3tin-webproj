@@ -9,7 +9,7 @@
 namespace model;
 
 
-interface StatusMelidingRepository
+interface StatusMeldingRepository
 {
     public function getAll();
 
@@ -17,5 +17,5 @@ interface StatusMelidingRepository
 
     public function addStatusMelding(StatusMelding $statusMelding);
 
-    public function updateStatusMelding(StatusMeliding $statusMeliding);
+    public function updateStatusMelding(StatusMelding $statusMelding);
 }

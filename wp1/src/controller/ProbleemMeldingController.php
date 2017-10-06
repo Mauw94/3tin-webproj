@@ -22,8 +22,8 @@ class ProbleemMeldingController
 
     public function handleGetAll()
     {
-        $probleemMelding = $this->probleemMeldingRepo->getAll();
-        $this->view->show(['toShow' => $probleemMelding]);
+        $probleemMeldingen = $this->probleemMeldingRepo->getAll();
+        $this->view->show(['toShow' => $probleemMeldingen]);
     }
 
     public function handleGetById(int $id)
