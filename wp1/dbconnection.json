@@ -1,5 +1,5 @@
 {
-  "dsn": "url=localhost;dbname=web-project3tin",
-  "username": "",
-  "password": ""
+  "dsn": "url=192.168.33.11;dbname=web-project3tin",
+  "username": "admin",
+  "password": "admin"
 }
