@@ -2,14 +2,14 @@
 
 use \model\LocatiePDORepository;
 use \model\Locatie;
-
-class LocatiePDORepositoryTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+class LocatiePDORepositoryTest extends TestCase
 {
     private $pdoLocatieRepository;
 
     public function setUp()
     {
-        $pdo = new PDO("url=localhost;dbname=web-project3tin", "root", "");
+        $pdo = new PDO("url=http://192.168.33.11;dbname=web-project3tin", "admin", "admin");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdoLocatieRepository = new LocatiePDORepository($pdo);
     }

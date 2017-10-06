@@ -2,8 +2,8 @@
 
 use \model\Locatie;
 use \controller\LocatieController;
-
-class LocatieControllerTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+class LocatieControllerTest extends TestCase
 {
     private $mockLocatieRepo;
     private $mockJsonView;
