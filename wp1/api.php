@@ -1,9 +1,9 @@
 <?php
-require_once "src/autoload.php";
+require_once "vendor/autoload.php";
 
 use view\JsonView;
-use \model\LocatiePDORepository;
-use \controller\LocatieController;
+use model\LocatiePDORepository;
+use controller\LocatieController;
 
 $pdo = null;
 

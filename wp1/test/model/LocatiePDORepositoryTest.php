@@ -1,7 +1,8 @@
 <?php
+require_once 'vendor/autoload.php';
 
-use \model\LocatiePDORepository;
-use \model\Locatie;
+use model\LocatiePDORepository;
+use model\Locatie;
 use \PHPUnit\Framework\TestCase;
 
 class LocatiePDORepositoryTest extends TestCase
