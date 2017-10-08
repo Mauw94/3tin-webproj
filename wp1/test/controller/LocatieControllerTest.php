@@ -11,7 +11,7 @@ class LocatieControllerTest extends TestCase
 
     public function setUp()
     {
-        $this->mockLocatieRepo = $this->getMockBuilder('model\LocatieRepository')->getMock();
+        $this->mockLocatieRepo = $this->getMockBuilder('model\LocatiePDORepository')->getMock();
         $this->mockJsonView = $this->getMockBuilder('view\JsonView')->getMock();
     }
 
@@ -25,7 +25,7 @@ class LocatieControllerTest extends TestCase
     {
         $locatie = new Locatie(1, "test");
         $this->mockLocatieRepo->expects($this->atLeastOnce())
-            ->method('handleGetById')
+            ->method('getById')
             ->will($this->returnValue($locatie));
 
         $this->mockJsonView->expects($this->atLeastOnce())
@@ -46,7 +46,7 @@ class LocatieControllerTest extends TestCase
         $locatie = json_decode($locatieJson);
 
         $this->mockLocatieRepo->expects($this->atLeastOnce())
-            ->method('handleAddLocatie')
+            ->method('addLocatie')
             ->will($this->returnValue($locatie));
 
         $this->mockJsonView->expects($this->atLeastOnce())
@@ -67,7 +67,7 @@ class LocatieControllerTest extends TestCase
         $locatie = json_decode($locatieJson);
 
         $this->mockLocatieRepo->expects($this->atLeastOnce())
-            ->method('handleUpdateLocatie')
+            ->method('updateLocatie')
             ->will($this->returnValue($locatie));
 
         $this->mockJsonView->expects($this->atLeastOnce())
@@ -85,7 +85,7 @@ class LocatieControllerTest extends TestCase
     public function test_handleDeleteLocatie()
     {
         $this->mockLocatieRepo->expects($this->atLeastOnce())
-            ->method('handleDeleteLocatie')
+            ->method('deleteLocatie')
             ->will($this->returnValue(null));
 
         $locatieController = new LocatieController($this->mockLocatieRepo, $this->mockJsonView);
