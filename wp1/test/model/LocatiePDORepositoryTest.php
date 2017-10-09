@@ -25,19 +25,19 @@ class LocatiePDORepositoryTest extends TestCase
     {
         $locatie = $this->pdoLocatieRepository->getById(0);
         $testLocatie = new Locatie(0, "Test");
-        $this->assertEquals($locatie, $testLocatie);
+        $this->assertEquals($testLocatie, $locatie);
     }
 
     public function test_findLocatieById_nothing()
     {
         $locatie = $this->pdoLocatieRepository->getById(-1);
-        $this->assertEquals($locatie, null);
+        $this->assertEquals(null, $locatie);
     }
 
     public function test_findLocatieById_error()
     {
         $locatie = $this->pdoLocatieRepository->getById("a");
-        $this->assertEquals($locatie, null);
+        $this->assertEquals(null, $locatie);
     }
 
     public function test_added_error()
