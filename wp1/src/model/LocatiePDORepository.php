@@ -2,16 +2,15 @@
 
 namespace model;
 
-
-//use Doctrine\DBAL\Driver\PDOConnection;
-
 class LocatiePDORepository implements LocatieRepository
 {
     private $connection;
+    private $locatieRepo;
 
-    public function __construct(\PDO $connection)
+    public function __construct(\PDO $connection, LocatieRepository $locatieRepository)
     {
         $this->connection = $connection;
+        $this->locatieRepo = $locatieRepository;
     }
 
     public function getAll()
