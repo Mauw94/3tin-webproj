@@ -23,14 +23,14 @@ class LocatiePDORepositoryTest extends TestCase
 
     public function test_FindLocatieById_found()
     {
-        $locatie = $this->pdoLocatieRepository->getById(0);
-        $testLocatie = new Locatie(0, "Test");
+        $locatie = $this->pdoLocatieRepository->getById(1);
+        $testLocatie = new Locatie(1, "Hasselt");
         $this->assertEquals($testLocatie, $locatie);
     }
 
     public function test_findLocatieById_nothing()
     {
-        $locatie = $this->pdoLocatieRepository->getById(-1);
+        $locatie = $this->pdoLocatieRepository->getById(0);
         $this->assertEquals(null, $locatie);
     }
 
@@ -52,5 +52,4 @@ class LocatiePDORepositoryTest extends TestCase
         $return = $this->pdoLocatieRepository->deleteLocatie("a");
         $this->assertNull($return);
     }
-
 }
