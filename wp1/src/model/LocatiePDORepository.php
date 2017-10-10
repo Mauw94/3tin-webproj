@@ -38,7 +38,7 @@ class LocatiePDORepository implements LocatieRepository
             $statement->setFetchMode(\PDO::FETCH_ASSOC);
             $statement->execute();
             $locatie = $statement->fetchAll();
-            return $locatie;
+            return new Locatie($locatie[0]['id'],$locatie[0]['naam']);
         } catch (\Exception $exception) {
             return null;
         }
