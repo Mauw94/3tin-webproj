@@ -12,11 +12,14 @@ namespace model;
 class ScorePDORepository implements ScoreRepository
 {
     private $connection = null;
+    private $scoreRepo;
 
-    public function __construct(\PDO $connection)
+    public function __construct(\PDO $connection, ScoreRepository $scoreRepository)
     {
         $this->connection = $connection;
+        $this->scoreRepo = $scoreRepository;
     }
+
     public function getScoreByIdprobleemmelding(int $id)
     {
         try {

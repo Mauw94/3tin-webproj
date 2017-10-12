@@ -3,7 +3,10 @@
         "phpunit/phpunit": "6"
     },
     "require": {
-        "altorouter/altorouter": "^1.2"
+        "altorouter/altorouter": "^1.2",
+        "php-di/php-di": "5",
+        "php-di/invoker": "1.3",
+        "mnapoli/silly": "1.5.1"
     },
      "autoload": {
         "psr-4": {

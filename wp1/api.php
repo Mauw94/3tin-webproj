@@ -3,7 +3,15 @@ require_once "vendor/autoload.php";
 
 use view\JsonView;
 use model\LocatiePDORepository;
+use model\LocatieRepository;
+use view\View;
+
 use controller\LocatieController;
+
+$container = require __DIR__ . 'src/app/container.php';
+$app = new Silly\Application();
+
+$app->useContainer($container, $injectWithTypeHint = true);
 
 $pdo = null;
 
@@ -51,6 +59,16 @@ try {
         }
     );
 
+    // Silly
+    $app->command('locaties', function (LocatieRepository $repository, View $view) {
+        $locaties = $repository->getAll();
+        foreach ($locaties as $locatie) {
+            $data['id'] = $locatie->getId();
+            $data['name'] = $locatie->getName();
+            print($view->show($data));
+        }
+    });
+    $app->run();
 
 } catch (\Exception $e) {
     print($e);
