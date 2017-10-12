@@ -16,6 +16,7 @@ try {
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
     $requestBody = file_get_contents("php://input");
 
     $dbinfo = json_decode(file_get_contents('dbconnection.json'), true);
@@ -31,39 +32,33 @@ try {
     $locatieController = new LocatieController($locatieRepository, $jsonView);
 
     $router = new AltoRouter();
-    $router->setBasePath('/api.php/');
+    $router->setBasePath('/api.php');
 
     // locatie mapping
-    $router->map('GET', 'locaties/[i:id]',
-        function ($id) use ($locatieController) {
-        $locatieController->handleGetById($id);
-        }
-    );
+    $router->map('GET', '/locaties', 'wp1/src/controller/LocatieController#handleGetAll');
 
-    $router->map('POST', 'locaties',
+    $router->map('GET', '/locaties/[i:id]', "wp1/src/controller/LocatieController#handleGetBydId");
+
+    $router->map('POST', '/locaties',
         function () use ($locatieController, $requestBody) {
         $locatieController->handleAddLocatie($requestBody);
         }
     );
 
-    $router->map('PUT', 'locaties',
+    $router->map('PUT', '/locaties',
         function () use ($locatieController, $requestBody) {
             $locatieController->handleUpdateLocatie($requestBody);
         }
     );
 
-    $router->map('DELETE', 'locaties/[i:id]',
-        function ($id) use ($locatieController) {
-        $locatieController->handleDeleteLocatie($id);
-        }
-    );
+    $router->map('DELETE', '/locaties/[i:id]', 'wp1/src/controller/LocatieController#handleDeleteLocation');
 
     $match = $router->match();
-    if ($match && is_callable($match['target'])) {
-        call_user_func($match['target'], $match['params']);
-    } else {
-        header($_SERVER["SERVER_PROTOCOL"] . "404 Not Found");
-    }
+//    if ($match && is_callable($match['target'])) {
+//        call_user_func($match['target'], $match['params']);
+//    } else {
+//        header($_SERVER["SERVER_PROTOCOL"] . "404 Not Found");
+//    }
 
     // Silly
 //    $app->command('locaties', function (LocatieRepository $repository, View $view) {
