@@ -29,14 +29,14 @@ class LocatieController
 
     public function handleUpdateLocatie($locatie) {
         $decode = json_decode($locatie, true);
-        $newLocatie = new Locatie((int)$decode['id'], $decode['naame']);
+        $newLocatie = new Locatie((int)$decode['id'], $decode['naam']);
         $this->locatieRepo->updateLocatie($newLocatie);
         $this->view->show(['toShow' => $newLocatie]);
     }
 
     public function handleAddLocatie($locatie) {
         $decode = json_decode($locatie, true);
-        $newLocatie = new Locatie((int)$decode['id'], $decode['naame']);
+        $newLocatie = new Locatie((int)$decode['id'], $decode['naam']);
         $this->locatieRepo->addLocatie($newLocatie);
         $this->view->show(['toShow' => $newLocatie]);
     }

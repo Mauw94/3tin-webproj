@@ -1,5 +1,10 @@
+//{
+//  "dsn": "mysql:host=192.168.33.11;dbname=web-project3tin",
+//  "username": "admin",
+//  "password": "admin"
+//}
 {
-  "dsn": "mysql:host=192.168.33.11;dbname=web-project3tin",
-  "username": "admin",
-  "password": "admin"
+  "dsn": "mysql:host=blackturtle.eu;dbname=bramnfx154_webProject",
+  "username": "bramnfx154_webProject",
+  "password": "JLr4Zsgkl"
 }

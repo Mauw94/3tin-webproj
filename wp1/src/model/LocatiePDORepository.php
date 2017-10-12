@@ -2,15 +2,16 @@
 
 namespace model;
 
+
+//use Doctrine\DBAL\Driver\PDOConnection;
+
 class LocatiePDORepository implements LocatieRepository
 {
     private $connection;
-    private $locatieRepo;
 
-    public function __construct(\PDO $connection, LocatieRepository $locatieRepository)
+    public function __construct(\PDO $connection)
     {
         $this->connection = $connection;
-        $this->locatieRepo = $locatieRepository;
     }
 
     public function getAll()
@@ -49,12 +50,16 @@ class LocatiePDORepository implements LocatieRepository
         try {
             $id = $locatie->getId();
             $naam = $locatie->getNaam();
+            if(!(is_numeric($id))){
+                return null;
+            }
             $statement = $this->connection->prepare('INSERT INTO locatie(id, naam) VALUES(?,?)');
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->bindParam(2, $naam, \PDO::PARAM_STR);
             $statement->execute();
             return $locatie;
         } catch (\Exception $exception) {
+            print_r($exception->getMessage());
             return null;
         }
     }

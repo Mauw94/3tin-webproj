@@ -44,7 +44,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $probleemMelding = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($probleemMelding > 0) {
-                return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[1]['locatieid'],$probleemMelding[2]['probleem'], $probleemMelding[3]['datum'], $probleemMelding[4]['afgehandeld']);
+            return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[1]['locatieid'],$probleemMelding[2]['probleem'], $probleemMelding[3]['datum'], $probleemMelding[4]['afgehandeld']);
             } else {
                 return null;
             }
