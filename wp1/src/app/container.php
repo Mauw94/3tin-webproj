@@ -4,7 +4,7 @@ namespace app;
 
 use DI\ContainerBuilder;
 
-require_once __DIR__ . "../../vendor/autoload.php";
+//require_once "/vendor/autoload.php";
 
 $containerBuilder = new ContainerBuilder();
 $containerBuilder->addDefinitions(__DIR__ . '/config.php');
