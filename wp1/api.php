@@ -64,6 +64,7 @@ try {
     } else {
         header($_SERVER["SERVER_PROTOCOL"] . "404 Not Found");
     }
+
     // Silly
 //    $app->command('locaties', function (LocatieRepository $repository, View $view) {
 //        $locaties = $repository->getAll();
