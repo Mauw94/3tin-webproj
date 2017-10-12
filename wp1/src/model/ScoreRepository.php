@@ -12,6 +12,6 @@ namespace model;
 interface ScoreRepository
 {
     public function getScoreByIdprobleemmelding(int $id);
-    public function updateScoreByIdprobleemmelding(int $id, int $score);
-    public function addScoreByIdprobleemmelding($score);
+    public function updateScoreByIdprobleemmelding(Score $score);
+    public function addScoreByIdprobleemmelding(Score $score);
 }

@@ -11,7 +11,7 @@ class LocatiePDORepositoryTest extends TestCase
 
     public function setUp()
     {
-        $pdo = new PDO("mysql:host=192.168.33.11;dbname=web-project3tin", "admin", "admin");
+        $pdo = new PDO("mysql:host=blackturtle.eu;dbname=bramnfx154_webProject", "bramnfx154_webProject", "JLr4Zsgkl");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdoLocatieRepository = new LocatiePDORepository($pdo);
     }
