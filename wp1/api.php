@@ -21,15 +21,17 @@ try {
     $requestBody = file_get_contents("php://input");
 
     $dbinfo = json_decode(file_get_contents('dbconnection.json'), true);
-    //var_dump($dbinfo['password']);
     $pdo = new PDO($dbinfo['dsn'], $dbinfo['username'], $dbinfo['password']);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $jsonView = new JsonView();
-
     $locatieRepository = new LocatiePDORepository($pdo);
     $locatieController = new LocatieController($locatieRepository, $jsonView);
+
+//    $locatieRepository = $container->get('LocatiePDORepository');
+//    $jsonView = $container->get('JsonView');
+//    $locatieController = $container->get('LocatieController');
 
     $router = new AltoRouter();
     $router->setBasePath('/');
