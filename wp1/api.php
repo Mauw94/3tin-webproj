@@ -1,4 +1,5 @@
 <?php
+
 require_once "vendor/autoload.php";
 
 use view\JsonView;
@@ -20,9 +21,8 @@ try {
     $requestBody = file_get_contents("php://input");
 
     $dbinfo = json_decode(file_get_contents('dbconnection.json'), true);
-    var_dump($dbinfo['password']);
-    //$pdo = new PDO($dbinfo['dsn'], $dbinfo['username'], $dbinfo['password']);
-    $pdo = new PDO("mysql:host=192.168.33.11;dbname=web-project3tin", "admin", "admin");
+    //var_dump($dbinfo['password']);
+    $pdo = new PDO($dbinfo['dsn'], $dbinfo['username'], $dbinfo['password']);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -32,38 +32,51 @@ try {
     $locatieController = new LocatieController($locatieRepository, $jsonView);
 
     $router = new AltoRouter();
-    $router->setBasePath('/api.php');
+    $router->setBasePath('/');
 
     // locatie mapping
-    $router->map('GET', '/', function () {
-        require   'src/view/JsonView.php';
+     $router->map('GET', '/', function () {
+       require   'src/view/JsonView.php';
     });
 
-    $router->map('GET', '/locaties', 'wp1/src/controller/LocatieController#handleGetAll');
+    $router->map('GET', 'locaties/', function () use (&$locatieController, $requestBody) {
+        $locatieController->handleGetAll($requestBody);
+    });
 
-    $router->map('GET', '/locaties/[i:id]', "wp1/src/controller/LocatieController#handleGetBydId");
+    $router->map('GET', 'locaties/[i:id]', function ($id) use (&$locatieController) {
+        $locatieController->handleGetById($id);
+    });
 
-    $router->map('POST', '/locaties',
+    $router->map('POST', 'locaties',
         function () use ($locatieController, $requestBody) {
         $locatieController->handleAddLocatie($requestBody);
         }
     );
 
-    $router->map('PUT', '/locaties',
-        function () use ($locatieController, $requestBody) {
+    $router->map('PUT', 'locaties',
+        function () use (&$locatieController, $requestBody) {
             $locatieController->handleUpdateLocatie($requestBody);
         }
     );
 
-    $router->map('DELETE', '/locaties/[i:id]', 'wp1/src/controller/LocatieController#handleDeleteLocation');
+    $router->map('DELETE', 'locaties/delete/[i:id]', function ($id) use (&$locatieController) {
+        $locatieController->handleDeleteLocatie($id);
+    });
+
+    $router->map(
+        'GET',
+        'persons/[i:id]',
+        function ($id) {
+            echo $id;
+        }
+    );
 
     $match = $router->match();
-//    if ($match && is_callable($match['target'])) {
-//        call_user_func($match['target'], $match['params']);
-//    } else {
-//        header($_SERVER["SERVER_PROTOCOL"] . "404 Not Found");
-//    }
-
+    if ($match && is_callable($match['target'])) {
+        call_user_func_array($match['target'], $match['params']);
+    } else {
+        echo 'oops';//   http_response_code(500);
+    }
     // Silly
 //    $app->command('locaties', function (LocatieRepository $repository, View $view) {
 //        $locaties = $repository->getAll();
