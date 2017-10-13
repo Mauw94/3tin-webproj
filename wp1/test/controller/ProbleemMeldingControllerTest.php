@@ -22,5 +22,24 @@ class ProbleemMeldingControllerTest extends TestCase
         $this->mockJsonView = null;
     }
 
+    public function test_getById_probleemMeldingFound()
+    {
+        $probleem = new ProbleemMelding(1, "test", "probleem", 19/19/2019, 0);
+        $this->mockLocatieRepo->expects($this->atLeastOnce())
+            ->method('getById')
+            ->will($this->returnValue($probleem));
 
+        $this->mockJsonView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object) {
+                $locatie = $object['toShow'];
+                printf("%s", json_encode($locatie));
+            }));
+
+        $probleemMeldingController = new LocatieController($this->mockLocatieRepo, $this->mockJsonView);
+        $probleemMeldingController->handleGetById($probleem->getId());
+        $this->expectOutputString(sprintf("%s", json_encode($probleem)));
+    }
+
+    
 }
