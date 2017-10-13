@@ -42,6 +42,7 @@ class LocatieController
     }
 
     public function handleDeleteLocatie(int $id) {
-        $this->locatieRepo->deleteLocatie($id);
+        $returnValue = 'rows deleted ' . $this->locatieRepo->deleteLocatie($id);;
+        $this->view->show(['toShow' => $returnValue]);
     }
 }

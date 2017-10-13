@@ -79,12 +79,15 @@ class LocatiePDORepository implements LocatieRepository
         }
     }
 
-    public function deleteLocatie(int $id)
+    public function deleteLocatie(int $locatieId)
     {
         try {
-            $statement = $this->connection->prepare("DELETE * FROM locatie WHERE id=?");
+            $id = $locatieId;
+            $statement = $this->connection->prepare("DELETE FROM locatie WHERE id=?");
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->execute();
+            $count = $statement->rowCount();
+            return $count;
         } catch (\Exception $exception) {
             return null;
         }

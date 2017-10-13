@@ -47,29 +47,21 @@ try {
         $locatieController->handleGetById($id);
     });
 
-    $router->map('POST', 'locaties',
+    $router->map('POST', 'locaties/',
         function () use ($locatieController, $requestBody) {
         $locatieController->handleAddLocatie($requestBody);
         }
     );
 
-    $router->map('PUT', 'locaties',
+    $router->map('PUT', 'locaties/',
         function () use (&$locatieController, $requestBody) {
             $locatieController->handleUpdateLocatie($requestBody);
         }
     );
 
-    $router->map('DELETE', 'locaties/delete/[i:id]', function ($id) use (&$locatieController) {
+    $router->map('DELETE', 'locaties/[i:id]', function ($id) use (&$locatieController) {
         $locatieController->handleDeleteLocatie($id);
     });
-
-    $router->map(
-        'GET',
-        'persons/[i:id]',
-        function ($id) {
-            echo $id;
-        }
-    );
 
     $match = $router->match();
     if ($match && is_callable($match['target'])) {
