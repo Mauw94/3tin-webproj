@@ -11,9 +11,14 @@ class LocatiePDORepositoryTest extends TestCase
 
     public function setUp()
     {
-        $pdo = new PDO("mysql:host=blackturtle.eu;dbname=bramnfx154_webProject", "bramnfx154_webProject", "JLr4Zsgkl");
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->pdoLocatieRepository = new LocatiePDORepository($pdo);
+        $this->connection = new PDO('sqlite::memory:');
+        $this->connection->exec('CREATE TABLE locatie (
+                        id INT, 
+                        naam VARCHAR(255),
+                        PRIMARY KEY (id)
+                   )');
+        $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdoLocatieRepository = new LocatiePDORepository($this->connection);
     }
 
     public function tearDown()
@@ -21,22 +26,22 @@ class LocatiePDORepositoryTest extends TestCase
         $this->pdoLocatieRepository = null;
     }
 
+    public function test_AddLocation(){
+        $locatie = new Locatie(1, "Hasselt");
+        $return = $this->pdoLocatieRepository->addLocatie($locatie);
+        $this->assertEquals($locatie,$return);
+    }
     public function test_FindLocatieById_found()
     {
-        $locatie = $this->pdoLocatieRepository->getById(1);
         $testLocatie = new Locatie(1, "Hasselt");
+        $this->pdoLocatieRepository->addLocatie($testLocatie);
+        $locatie = $this->pdoLocatieRepository->getById(1);
         $this->assertEquals($testLocatie, $locatie);
     }
 
     public function test_findLocatieById_nothing()
     {
-        $locatie = $this->pdoLocatieRepository->getById(0);
-        $this->assertEquals(null, $locatie);
-    }
-
-    public function test_findLocatieById_error()
-    {
-        $locatie = $this->pdoLocatieRepository->getById("a");
+        $locatie = $this->pdoLocatieRepository->getById(99999);
         $this->assertEquals(null, $locatie);
     }
 
@@ -49,7 +54,7 @@ class LocatiePDORepositoryTest extends TestCase
 
     public function test_delete_error()
     {
-        $return = $this->pdoLocatieRepository->deleteLocatie("a");
+        $return = $this->pdoLocatieRepository->deleteLocatie(9878);
         $this->assertNull($return);
     }
 }

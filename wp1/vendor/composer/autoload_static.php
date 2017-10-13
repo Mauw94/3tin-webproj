@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8958cfbaf49da038352f0b197e04c711
+class ComposerStaticInit2dbaad6990c209a1209b9ddfcec550fa
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -31,10 +31,6 @@ class ComposerStaticInit8958cfbaf49da038352f0b197e04c711
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
-        ),
-        'T' => 
-        array (
-            'Twig\\' => 5,
         ),
         'S' => 
         array (
@@ -84,10 +80,6 @@ class ComposerStaticInit8958cfbaf49da038352f0b197e04c711
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
-        ),
-        'Twig\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -140,13 +132,6 @@ class ComposerStaticInit8958cfbaf49da038352f0b197e04c711
     );
 
     public static $prefixesPsr0 = array (
-        'T' => 
-        array (
-            'Twig_' => 
-            array (
-                0 => __DIR__ . '/..' . '/twig/twig/lib',
-            ),
-        ),
         'P' => 
         array (
             'Prophecy\\' => 
@@ -624,10 +609,10 @@ class ComposerStaticInit8958cfbaf49da038352f0b197e04c711
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8958cfbaf49da038352f0b197e04c711::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8958cfbaf49da038352f0b197e04c711::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8958cfbaf49da038352f0b197e04c711::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit8958cfbaf49da038352f0b197e04c711::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit2dbaad6990c209a1209b9ddfcec550fa::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit2dbaad6990c209a1209b9ddfcec550fa::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit2dbaad6990c209a1209b9ddfcec550fa::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit2dbaad6990c209a1209b9ddfcec550fa::$classMap;
 
         }, null, ClassLoader::class);
     }

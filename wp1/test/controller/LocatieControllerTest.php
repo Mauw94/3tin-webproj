@@ -11,8 +11,8 @@ class LocatieControllerTest extends TestCase
 
     public function setUp()
     {
-        $this->mockLocatieRepo = $this->getMockBuilder('model\LocatiePDORepository')->getMock();
-        $this->mockJsonView = $this->getMockBuilder('view\JsonView')->getMock();
+        $this->mockLocatieRepo = $this->getMockBuilder('model\LocatiePDORepository')->disableOriginalConstructor()->getMock();
+        $this->mockJsonView = $this->getMockBuilder('view\JsonView')->disableOriginalConstructor()->getMock();
     }
 
     public function tearDown()
@@ -90,6 +90,6 @@ class LocatieControllerTest extends TestCase
 
         $locatieController = new LocatieController($this->mockLocatieRepo, $this->mockJsonView);
         $locatieController->handleDeleteLocatie(0);
-        $this->expectOutputStrin('');
+        $this->expectOutputString('');
     }
 }
