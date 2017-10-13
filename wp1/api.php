@@ -35,6 +35,10 @@ try {
     $router->setBasePath('/api.php');
 
     // locatie mapping
+    $router->map('GET', '/', function () {
+        require   'src/view/JsonView.php';
+    });
+
     $router->map('GET', '/locaties', 'wp1/src/controller/LocatieController#handleGetAll');
 
     $router->map('GET', '/locaties/[i:id]', "wp1/src/controller/LocatieController#handleGetBydId");
@@ -65,7 +69,7 @@ try {
 //        $locaties = $repository->getAll();
 //        foreach ($locaties as $locatie) {
 //            $data['id'] = $locatie->getId();
-//            $data['name'] = $locatie->getName();
+//            $data['name'] = $locatie->getNaam();
 //            print($view->show($data));
 //        }
 //    });
