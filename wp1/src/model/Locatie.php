@@ -3,7 +3,7 @@
 namespace model;
 
 
-class Locatie
+class Locatie implements \JsonSerializable
 {
     private $id;
     private $naam;
@@ -49,6 +49,14 @@ class Locatie
     public function setNaam($naam)
     {
         $this->naam = $naam;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'naam' => $this->naam
+        ];
     }
 
 }
