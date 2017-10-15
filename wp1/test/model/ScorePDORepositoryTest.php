@@ -47,6 +47,7 @@ class ScorePDORepositoryTest extends TestCase
         $score = new Score(1,1,15,50);
         $return = $this->pdoRepositoryScore->updateScoreByIdprobleemmelding($score);
 
+
         $this->assertEquals(50,$return->getTotalescore());
     }
     public function test_GemScoreById(){

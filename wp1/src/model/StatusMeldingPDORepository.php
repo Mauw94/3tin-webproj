@@ -63,6 +63,7 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
 
             return $statusMelding;
         } catch (\Exception $exception) {
+            print $exception->getMessage();
             return null;
         }
     }
