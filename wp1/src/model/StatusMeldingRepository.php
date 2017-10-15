@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yannick
- * Date: 3/10/2017
- * Time: 16:25
- */
 
 namespace model;
-
 
 interface StatusMeldingRepository
 {

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yannick
- * Date: 29/09/2017
- * Time: 10:10
- */
 
 namespace model;
 
@@ -12,12 +6,10 @@ namespace model;
 class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
 {
     private $connection = null;
-    private $probleemMelding;
 
-    public function __construct(\PDO $connection, ProbleemMeldingRepository $probleemMelding)
+    public function __construct(\PDO $connection)
     {
         $this->connection = $connection;
-        $this->probleemMelding = $probleemMelding;
     }
 
     public function getAll()
@@ -46,7 +38,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $probleemMelding = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($probleemMelding > 0) {
-            return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[1]['locatieid'],$probleemMelding[2]['probleem'], $probleemMelding[3]['datum'], $probleemMelding[4]['afgehandeld']);
+            return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[0]['locatieid'],$probleemMelding[0]['probleem'], $probleemMelding[0]['datum'], $probleemMelding[0]['afgehandeld']);
             } else {
                 return null;
             }
@@ -104,6 +96,20 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
 
             $afgehandeldeProbleemMeldingen = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $afgehandeldeProbleemMeldingen;
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    public function deleteProbleemMelding(int $probleemId)
+    {
+        try {
+            $id = $probleemId;
+            $statement = $this->connection->prepare("DELETE FROM probleemmelding WHERE id=?");
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->execute();
+            $count = $statement->rowCount();
+            return $count;
         } catch (\Exception $exception) {
             return null;
         }

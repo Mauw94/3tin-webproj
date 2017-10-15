@@ -4,13 +4,13 @@ require_once "vendor/autoload.php";
 
 use view\JsonView;
 use model\LocatiePDORepository;
-use model\LocatieRepository;
-use view\View;
+use model\StatusMeldingPDORepository;
+use controller\StatusMeldingController;
+use model\ProbleemMeldingPDORepository;
+use controller\ProbleemMeldingController;
 use controller\LocatieController;
 
 $container = require __DIR__ . '/src/app/container.php';
-$app = new Silly\Application();
-$app->useContainer($container, $injectWithTypeHint = true);
 $pdo = null;
 
 try {
@@ -18,27 +18,27 @@ try {
     header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-    $requestBody = file_get_contents("php://input");
-
     $dbinfo = json_decode(file_get_contents('dbconnection.json'), true);
     $pdo = new PDO($dbinfo['dsn'], $dbinfo['username'], $dbinfo['password']);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    $requestBody = file_get_contents("php://input");
     $jsonView = new JsonView();
     $locatieRepository = new LocatiePDORepository($pdo);
     $locatieController = new LocatieController($locatieRepository, $jsonView);
 
-//    $locatieRepository = $container->get('LocatiePDORepository');
-//    $jsonView = $container->get('JsonView');
-//    $locatieController = $container->get('LocatieController');
+    $probleemMeldingRepo = new ProbleemMeldingPDORepository($pdo);
+    $probleemMeldingController = new ProbleemMeldingController($probleemMeldingRepo, $jsonView);
+
+    $statusMeldingRepo = new StatusMeldingPDORepository($pdo);
+    $statusMeldingController = new StatusMeldingController($statusMeldingRepo, $jsonView);
 
     $router = new AltoRouter();
     $router->setBasePath('/');
 
-    // locatie mapping
-     $router->map('GET', '/', function () {
-       require   'src/view/JsonView.php';
+    $router->map('GET', '/', function () {
+        require   'src/view/JsonView.php';
     });
 
     $router->map('GET', 'locaties/', function () use (&$locatieController, $requestBody) {
@@ -51,7 +51,7 @@ try {
 
     $router->map('POST', 'locaties/',
         function () use ($locatieController, $requestBody) {
-        $locatieController->handleAddLocatie($requestBody);
+            $locatieController->handleAddLocatie($requestBody);
         }
     );
 
@@ -65,22 +65,52 @@ try {
         $locatieController->handleDeleteLocatie($id);
     });
 
+    $router->map('GET', 'problemen/', function () use (&$probleemMeldingController, $requestBody) {
+        $probleemMeldingController->handleGetAll($requestBody);
+    });
+
+    $router->map('GET', 'problemen/[i:id]', function ($id) use (&$probleemMeldingController) {
+        $probleemMeldingController->handleGetById($id);
+    });
+
+    $router->map('POST', 'problemen/', function () use (&$probleemMeldingController, $requestBody) {
+        $probleemMeldingController->handleAddProbleemMelding($requestBody);
+    });
+
+    $router->map('PUT', 'problemen/', function () use (&$probleemMeldingController, $requestBody) {
+        $probleemMeldingController->handleUpdateProbleemMelding($requestBody);
+    });
+
+    $router->map('DELETE', 'problemen/[i:id]', function ($id) use (&$probleemMeldingController) {
+        $probleemMeldingController->handleDeleteProbleemMelding($id);
+    });
+
+    $router->map('GET', 'statussen/', function () use (&$statusMeldingController, $requestBody) {
+        $statusMeldingController->handleGetAll($requestBody);
+    });
+
+    $router->map('GET', 'statussen/[i:id]', function ($id) use(&$statusMeldingController){
+        $statusMeldingController->handleGetById($id);
+    });
+
+    $router->map('POST', 'statussen/', function () use (&$statusMeldingController, $requestBody) {
+        $statusMeldingController->handleAddStatusMelding($requestBody);
+    });
+
+    $router->map('PUT', 'statussen/', function () use (&$statusMeldingController, $requestBody) {
+        $statusMeldingController->handleUpdateStatusMelding($requestBody);
+    });
+
+    $router->map('DELETE', 'statussen/[i:id]', function ($id) use (&$statusMeldingController) {
+        $statusMeldingController->handleDeleteStatusMelding($id);
+    });
+
     $match = $router->match();
     if ($match && is_callable($match['target'])) {
         call_user_func_array($match['target'], $match['params']);
     } else {
-        echo 'oops';//   http_response_code(500);
+        echo 'Something went wrong with the routing.';
     }
-    // Silly
-//    $app->command('locaties', function (LocatieRepository $repository, View $view) {
-//        $locaties = $repository->getAll();
-//        foreach ($locaties as $locatie) {
-//            $data['id'] = $locatie->getId();
-//            $data['name'] = $locatie->getNaam();
-//            print($view->show($data));
-//        }
-//    });
-//    $app->run();
 
 } catch (\Exception $e) {
     print($e);

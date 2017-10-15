@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yannick
- * Date: 3/10/2017
- * Time: 16:33
- */
 
 namespace model;
 
@@ -12,12 +6,10 @@ namespace model;
 class StatusMeldingPDORepository implements StatusMeldingRepository
 {
     private $connection = null;
-    private $statusMeldingRepo;
 
-    public function __construct(\PDO $connection, StatusMeldingRepository $statusMeldingRepository)
+    public function __construct(\PDO $connection)
     {
         $this->connection = $connection;
-        $this->statusMeldingRepo = $statusMeldingRepository;
     }
 
     public function getAll()
@@ -46,7 +38,7 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
             $statusMelding = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($statusMelding > 0) {
-                return new StatusMelding($statusMelding[0]['id'],$statusMelding[1]['locatieid'],$statusMelding[2]['status'], $statusMelding[3]['datum']);
+                return new StatusMelding($statusMelding[0]['id'],$statusMelding[0]['locatieid'],$statusMelding[0]['status'], $statusMelding[0]['datum']);
             } else {
                 return null;
             }
@@ -73,7 +65,6 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
         } catch (\Exception $exception) {
             return null;
         }
-
     }
 
     public function updateStatusMelding(StatusMelding $statusMelding)
@@ -94,6 +85,19 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
         } catch (\Exception $exception) {
             return null;
         }
+    }
 
+    public function deleteStatusMelding(int $statusdId)
+    {
+        try {
+            $id = $statusdId;
+            $statement = $this->connection->prepare("DELETE FROM statusmelding WHERE id=?");
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->execute();
+            $count = $statement->rowCount();
+            return $count;
+        } catch (\Exception $exception) {
+            return null;
+        }
     }
 }
