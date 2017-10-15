@@ -25,7 +25,7 @@ class ProbleemMeldingControllerTest extends TestCase
     public function test_getById_probleemMeldingFound()
     {
         $probleem = new ProbleemMelding(1, "test", "probleem", 19/19/2019, 0);
-        $this->mockLocatieRepo->expects($this->atLeastOnce())
+        $this->mockProbleemMeldingRepo->expects($this->atLeastOnce())
             ->method('getById')
             ->will($this->returnValue($probleem));
 
@@ -36,10 +36,27 @@ class ProbleemMeldingControllerTest extends TestCase
                 printf("%s", json_encode($locatie));
             }));
 
-        $probleemMeldingController = new LocatieController($this->mockLocatieRepo, $this->mockJsonView);
+        $probleemMeldingController = new ProbleemMeldingController($this->mockProbleemMeldingRepo, $this->mockJsonView);
         $probleemMeldingController->handleGetById($probleem->getId());
         $this->expectOutputString(sprintf("%s", json_encode($probleem)));
     }
 
+    public function test_addProbleemMelding()
+    {
+        $probleemMeldingJson = '{"id":0,"locatieid":"1","probleem":"Kapot","datum":"2017-10-11","afgehandeld":"1"}';
+        $probleemMelding = json_decode($probleemMeldingJson);
 
+        $this->mockProbleemMeldingRepo->expects($this->atLeastOnce())->method('addProbleemMelding')
+            ->will($this->returnValue($probleemMelding));
+
+        $this->mockJsonView->expects($this->atLeastOnce())->method('show')
+            ->will($this->returnCallback(function ($object){
+                $probleem = $object['toShow'];
+                printf("%s", json_encode($probleem));
+            }));
+
+        $probleemMeldingController = new ProbleemMeldingController($this->mockProbleemMeldingRepo, $this->mockJsonView);
+        $probleemMeldingController->handleAddProbleemMelding($probleemMeldingJson);
+        $this->expectOutputString(sprintf("%s", json_encode($probleemMelding)));
+    }
 }

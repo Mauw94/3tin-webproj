@@ -38,7 +38,7 @@ class ProbleemMeldingController
     public function handleAddProbleemMelding($probleemMelding)
     {
         $decode = json_decode($probleemMelding, true);
-        $newProbleemMelding = new ProbleemMelding(0, $decode['locatieid'], $decode['probleem'], $decode['datum'], $decode['afgehandeld']);
+        $newProbleemMelding = new ProbleemMelding($decode['id'], $decode['locatieid'], $decode['probleem'], $decode['datum'], $decode['afgehandeld']);
         $this->probleemMeldingRepo->addProbleemMelding($newProbleemMelding);
         $this->view->show(['toShow' => $newProbleemMelding]);
     }

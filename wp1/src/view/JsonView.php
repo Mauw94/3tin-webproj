@@ -12,7 +12,7 @@ class JsonView implements View
             $showJson = $data['toShow'];
             echo json_encode($showJson);
         } else {
-            echo '{}';
+            echo '{Nothing to show.}';
         }
     }
 

@@ -50,15 +50,17 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
     public function addProbleemMelding(ProbleemMelding $probleemMelding)
     {
         try {
+            $id = $probleemMelding->getId();
             $locatieId = $probleemMelding->getLocatieId();
             $probleem = $probleemMelding->getProbleem();
             $datum = $probleemMelding->getDatum();
             $afgehandeld = $probleemMelding->getAfgehandeld();
-            $statement = $this->connection->prepare('INSERT INTO probleemmelding(locatieid, probleem, datum, afgehandeld) VALUES(?,?,?,?)');
-            $statement->bindParam(1, $locatieId, \PDO::PARAM_INT);
-            $statement->bindParam(2, $probleem, \PDO::PARAM_STR);
-            $statement->bindParam(3, $datum, \PDO::PARAM_STR);
-            $statement->bindParam(4, $afgehandeld, \PDO::PARAM_BOOL);
+            $statement = $this->connection->prepare('INSERT INTO probleemmelding(id, locatieid, probleem, datum, afgehandeld) VALUES(?,?,?,?,?)');
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->bindParam(2, $locatieId, \PDO::PARAM_INT);
+            $statement->bindParam(3, $probleem, \PDO::PARAM_STR);
+            $statement->bindParam(4, $datum, \PDO::PARAM_STR);
+            $statement->bindParam(5, $afgehandeld, \PDO::PARAM_BOOL);
             $statement->execute();
             return $probleemMelding;
         } catch (\Exception $exception) {

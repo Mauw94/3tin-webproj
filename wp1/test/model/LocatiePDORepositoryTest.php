@@ -55,6 +55,6 @@ class LocatiePDORepositoryTest extends TestCase
     public function test_delete_error()
     {
         $return = $this->pdoLocatieRepository->deleteLocatie(9878);
-        $this->assertNull($return);
+        $this->assertEquals(0, $return);
     }
 }
