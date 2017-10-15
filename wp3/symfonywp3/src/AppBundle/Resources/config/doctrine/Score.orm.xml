@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="AppBundle\Entity\Users" table="users">
+  <entity name="AppBundle\Entity\Score" table="score">
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="naam" type="string" column="naam" length="30" nullable="false">
+    <field name="idprobleemmelding" type="integer" column="idprobleemmelding" nullable="false">
       <options>
-        <option name="fixed"/>
+        <option name="unsigned"/>
       </options>
     </field>
-    <field name="functie" type="string" column="functie" length="20" nullable="false">
+    <field name="aantalscores" type="integer" column="aantalscores" nullable="false">
       <options>
-        <option name="fixed"/>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="totalescore" type="integer" column="totalescore" nullable="false">
+      <options>
+        <option name="unsigned"/>
       </options>
     </field>
   </entity>
