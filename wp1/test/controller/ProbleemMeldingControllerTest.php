@@ -41,5 +41,5 @@ class ProbleemMeldingControllerTest extends TestCase
         $this->expectOutputString(sprintf("%s", json_encode($probleem)));
     }
 
-    
+
 }
