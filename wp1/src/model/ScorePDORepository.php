@@ -12,12 +12,10 @@ namespace model;
 class ScorePDORepository implements ScoreRepository
 {
     private $connection = null;
-    private $scoreRepo;
 
-    public function __construct(\PDO $connection, ScoreRepository $scoreRepository)
+    public function __construct(\PDO $connection)
     {
         $this->connection = $connection;
-        $this->scoreRepo = $scoreRepository;
     }
 
     public function getScoreByIdprobleemmelding(int $id)
@@ -29,7 +27,7 @@ class ScorePDORepository implements ScoreRepository
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result > 0) {
-                return new Score($result[0]['id'], $result[1]['idprobleemmelding'],  $result[2]['aantalscores'],  $result[3]['totaalscore']);
+                return new Score($result[0]['id'], $result[0]['idprobleemmelding'],  $result[0]['aantalscores'],  $result[0]['totalescore']);
             } else {
                 return null;
             }

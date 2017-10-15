@@ -120,7 +120,7 @@ class ProbleemMelding implements \JsonSerializable
     {
         return[
             'id' => $this->id,
-            'locatieId' => $this->locatieId,
+            'locatieid' => $this->locatieId,
             'probleem' => $this->probleem,
             'datum' => $this->datum,
             'afgehandeld' => $this->afgehandeld
