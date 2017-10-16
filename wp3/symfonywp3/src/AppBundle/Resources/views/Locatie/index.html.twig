@@ -9,17 +9,17 @@
         <thead>
         <tr>
             <th scope="col">Locatie</th>
-            <th scope="col" class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
+            <th scope="col" class="text-right"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
         </tr>
         </thead>
         <tbody>
         {% for locatie in locaties %}
             <tr>
-                <td>{{ locatie.naam}}</td>
+                <td>{{ locatie.naam }}</td>
 
                 <td class="text-right">
                     <div class="item-actions">
-                        <a href="{{ url('') }}"" class="btn btn-sm btn-default">
+                        <a class="btn btn-sm btn-default">
                             <i class="fa fa-eye" aria-hidden="true"></i> Show
                         </a>
                     </div>
