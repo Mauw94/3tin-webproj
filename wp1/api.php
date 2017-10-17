@@ -113,5 +113,5 @@ try {
     }
 
 } catch (\Exception $e) {
-    print($e);
+    print('Connection failed ' . $e);
 }
