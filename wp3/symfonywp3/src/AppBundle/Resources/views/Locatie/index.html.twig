@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Locatie:index{% endblock %}
+
+{% block body %}
+    <h1>Locatie List</h1>
+
+    <table class="table table-striped table-middle-aligned">
+        <thead>
+        <tr>
+            <th scope="col">Locatie</th>
+            <th scope="col" class="text-right"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for locatie in locaties %}
+            <tr>
+                <td>{{ locatie.naam }}</td>
+
+                <td class="text-right">
+                    <div class="item-actions">
+                        <a class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> Show
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" align="center">no locaties found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

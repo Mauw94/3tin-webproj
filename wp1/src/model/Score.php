@@ -55,6 +55,13 @@ class Score implements \JsonSerializable
     {
         return $this->aantalscores;
     }
+    /**
+     * @return mixed
+     */
+    public function getGemscores()
+    {
+        return round($this->totalescore/$this->aantalscores,2);
+    }
 
     /**
      * @param mixed $aantalscores
