@@ -28,6 +28,22 @@ class Locatie
      */
     private $id;
 
+    /**
+     * @return string
+     */
+    public function getNaam(): string
+    {
+        return $this->naam;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 
 }
 
