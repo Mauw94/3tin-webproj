@@ -32,5 +32,23 @@ class StatusMeldingPDORepositoryTest extends TestCase
         $return = $this->pdorepository->addStatusMelding($statusmelding);
         $this->assertEquals($statusmelding,$return);
     }
+    public function test_getById(){
+        $statusmelding = new StatusMelding(1,1,1,"2017-10-15");
+        $this->pdorepository->addStatusMelding($statusmelding);
+        $return = $this->pdorepository->getById(1);
+        $this->assertEquals($statusmelding,$return);
+    }
+    public function test_getAll(){
+        $statusmelding = new StatusMelding(1,1,1,"2017-10-15");
+        $this->pdorepository->addStatusMelding($statusmelding);
+        $return = $this->pdorepository->getAll();
+        $this->assertNotEquals(null,$return);
+    }
+    public function test_deleteStatusMleing(){
+        $statusmelding = new StatusMelding(1,1,1,"2017-10-15");
+        $this->pdorepository->addStatusMelding($statusmelding);
+        $return =  $this->pdorepository->deleteStatusMelding(1);
 
+        $this->assertEquals(1,$return);
+    }
 }
