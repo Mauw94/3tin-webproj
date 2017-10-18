@@ -32,11 +32,10 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
     public function getById(int $id)
     {
         try {
-            $statement = $this->connection->prepare("SELECT * FROM statusmelding WHERE id=?");
+            $statement = $this->connection->prepare('SELECT * FROM statusmelding WHERE id=?');
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->execute();
             $statusMelding = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
             if ($statusMelding > 0) {
                 return new StatusMelding($statusMelding[0]['id'],$statusMelding[0]['locatieid'],$statusMelding[0]['status'], $statusMelding[0]['datum']);
             } else {
@@ -63,7 +62,6 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
 
             return $statusMelding;
         } catch (\Exception $exception) {
-            print $exception->getMessage();
             return null;
         }
     }
@@ -84,6 +82,7 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
 
             return $statusMelding;
         } catch (\Exception $exception) {
+            print  $exception->getMessage();
             return null;
         }
     }
@@ -96,6 +95,8 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->execute();
             $count = $statement->rowCount();
+
+
             return $count;
         } catch (\Exception $exception) {
             return null;

@@ -61,9 +61,11 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $statement->bindParam(3, $probleem, \PDO::PARAM_STR);
             $statement->bindParam(4, $datum, \PDO::PARAM_STR);
             $statement->bindParam(5, $afgehandeld, \PDO::PARAM_BOOL);
-            $statement->execute();
+
+            print_r( $statement->execute());
             return $probleemMelding;
         } catch (\Exception $exception) {
+            print $exception->getMessage();
             return null;
         }
     }
