@@ -17,7 +17,7 @@ class ProbleemMeldingPDORepositoryTest extends TestCase
     {
         $this->connection = new PDO('sqlite::memory:');
         $this->connection->exec('CREATE TABLE probleemmelding(
-                        id INT PRIMARY KEY AUTOINCREMENT, 
+                        id INT, 
                         locatieid INT,
                         probleem VARCHAR,
                         datum DATE,
@@ -35,7 +35,7 @@ class ProbleemMeldingPDORepositoryTest extends TestCase
     public function test_addprobleemmelding(){
         $melding = new ProbleemMelding(1,1,"kapot toilet","2017-10-18",0);
         $return = $this->pdoMeldingRepository->addProbleemMelding($melding);
-        $this->assertEquals($melding,$return);
+        $this->assertEquals($melding, $return);
     }
 
 }
