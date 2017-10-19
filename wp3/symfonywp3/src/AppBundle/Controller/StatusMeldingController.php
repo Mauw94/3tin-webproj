@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Statusmelding;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -10,10 +11,13 @@ class StatusMeldingController extends Controller
     /**
      * @Route("/show")
      */
-    public function showAction()
+    public function showAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $statusMelding = $em->getRepository(Statusmelding::class)->find($id);
+
         return $this->render('AppBundle:StatusMelding:show.html.twig', array(
-            // ...
+            'statusMelding' => $statusMelding
         ));
     }
 

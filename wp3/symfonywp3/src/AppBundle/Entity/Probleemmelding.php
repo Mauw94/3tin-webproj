@@ -49,6 +49,44 @@ class Probleemmelding
      */
     private $id;
 
+    /**
+     * @return int
+     */
+    public function getLocatieid()
+    {
+        return $this->locatieid;
+    }
 
+    /**
+     * @return string
+     */
+    public function getProbleem()
+    {
+        return $this->probleem;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatum()
+    {
+        return $this->datum;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAfgehandeld()
+    {
+        return $this->afgehandeld;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
 
