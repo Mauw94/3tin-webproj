@@ -24,7 +24,7 @@ class LocatieController extends Controller
     }
 
     /**
-     * @Route("/show" , name="locatie_show")
+     * @Route("/show/{id}", requirements={"id": "\d+"}, name="locatie_show")
      */
     public function showAction($id)
     {
@@ -39,6 +39,7 @@ class LocatieController extends Controller
             'probleemMeldingen' => $probleemMeldingen,
             'statusMeldingen' => $statusMeldingen
         ));
+
     }
 
 }

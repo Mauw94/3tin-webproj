@@ -10,10 +10,11 @@ use Symfony\Component\BrowserKit\Request;
 
 class ProbleemMeldingController extends Controller
 {
-
+/*
     /**
      * @Route("/show")
      */
+/*
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -30,6 +31,7 @@ class ProbleemMeldingController extends Controller
      * @Route("/{id}/edit", requirements={"id": "\d+"}, name="probleemMelding_edit")
      * @Method({"GET", "POST"})
      */
+/*
     public function editAction(Probleemmelding $probleemMelding, Request $request)
     {
 
@@ -53,5 +55,5 @@ class ProbleemMeldingController extends Controller
             'form' => $form->createView(),
         ]);
     }
-
+*/
 }

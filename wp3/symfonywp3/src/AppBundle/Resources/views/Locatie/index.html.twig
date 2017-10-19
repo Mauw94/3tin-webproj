@@ -3,13 +3,13 @@
 {% block title %}AppBundle:Locatie:index{% endblock %}
 
 {% block body %}
-    <h1>Locatie List</h1>
+    <h1>Locatie lijst</h1>
 
     <table class="table table-striped table-middle-aligned">
         <thead>
         <tr>
             <th scope="col">Locatie</th>
-            <th scope="col" class="text-right"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
+            <th scope="col" class="text-right"><i class="fa fa-cogs" aria-hidden="true"></i> Acties</th>
         </tr>
         </thead>
         <tbody>
@@ -19,15 +19,15 @@
 
                 <td class="text-right">
                     <div class="item-actions">
-                        <a class="btn btn-sm btn-default">
-                            <i class="fa fa-eye" aria-hidden="true"></i> Show
+                        <a href="{{ path('locatie_show', {'id': locatie.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> Weergeven
                         </a>
                     </div>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4" align="center">no locaties found</td>
+                <td colspan="4" align="center">geen locaties </td>
             </tr>
         {% endfor %}
         </tbody>
