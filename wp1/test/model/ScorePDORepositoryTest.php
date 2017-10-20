@@ -38,7 +38,7 @@ class ScorePDORepositoryTest extends TestCase
         $score = new Score(1,1,10,40);
         $this->pdoRepositoryScore->addScoreByIdprobleemmelding($score);
         $return = $this->pdoRepositoryScore->getScoreByIdprobleemmelding(1);
-        $this->assertEquals($score->getIdprobleemmelding(),$return->getIdProbleemmelding());
+        $this->assertEquals($score->getIdProbleemMelding(),$return->getIdProbleemmelding());
     }
     public function test_UpdateScoreById(){
         $score = new Score(1,1,10,40);

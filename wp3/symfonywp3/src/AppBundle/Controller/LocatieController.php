@@ -15,8 +15,8 @@ class LocatieController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $locaties= $em->getRepository(Locatie::class)->findAll();
+        $entityManager = $this->getDoctrine()->getManager();
+        $locaties= $entityManager->getRepository(Locatie::class)->findAll();
 
         return $this->render('AppBundle:Locatie:index.html.twig', array(
             'locaties' => $locaties
@@ -28,11 +28,11 @@ class LocatieController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $probleemMeldingen= $em->getRepository(Probleemmelding::class)->findBy(
+        $entityManager = $this->getDoctrine()->getManager();
+        $probleemMeldingen= $entityManager->getRepository(Probleemmelding::class)->findBy(
             array('locatieid' => $id)
         );
-         $statusMeldingen = $em->getRepository(Statusmelding::class)->findBy(
+         $statusMeldingen = $entityManager->getRepository(Statusmelding::class)->findBy(
              array('locatieid' => $id)
          )  ;
         return $this->render('AppBundle:Locatie:show.html.twig', array(

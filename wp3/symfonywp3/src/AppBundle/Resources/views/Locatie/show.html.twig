@@ -20,7 +20,7 @@
                 <td>{{ probleemMelding.datum | date('d/m/Y') }}</td>
                 <td class="text-right">
                     <div class="item-actions">
-                        <a class="btn btn-sm btn-default">
+                        <a href="{{ path('probleemMelding_show', {'id': probleemMelding.id}) }}" class="btn btn-sm btn-default">
                             <i class="fa fa-eye" aria-hidden="true"></i> Show
                         </a>
                     </div>

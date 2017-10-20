@@ -13,8 +13,8 @@ class StatusMeldingController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $statusMelding = $em->getRepository(Statusmelding::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $statusMelding = $entityManager->getRepository(Statusmelding::class)->find($id);
 
         return $this->render('AppBundle:StatusMelding:show.html.twig', array(
             'statusMelding' => $statusMelding

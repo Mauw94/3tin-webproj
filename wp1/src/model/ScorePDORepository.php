@@ -36,12 +36,12 @@ class ScorePDORepository implements ScoreRepository
         }
     }
 
-    public function updateScoreByIdprobleemmelding(score $score)
+    public function updateScoreByIdprobleemmelding(Score $score)
     {
         try {
             $id = $score->getId();
-            $aantalScores = $score->getAantalscores();
-            $totaleScore = $score->getTotalescore();
+            $aantalScores = $score->getAantalScores();
+            $totaleScore = $score->getTotaleScore();
 
             $statement = $this->connection->prepare('UPDATE score SET aantalScores=?,totaleScore=? WHERE id=?');
             $statement->bindParam(1, $aantalScores, \PDO::PARAM_INT);
@@ -56,14 +56,14 @@ class ScorePDORepository implements ScoreRepository
         }
     }
 
-    public function addScoreByIdprobleemmelding(score $score)
+    public function addScoreByIdprobleemmelding(Score $score)
     {
         try {
-            $idprobleemmelding = $score->getIdprobleemmelding();
-            $aantalScores = $score->getAantalscores();
-            $totaleScore = $score->getTotalescore();
+            $idProbleemMelding = $score->getIdProbleemMelding();
+            $aantalScores = $score->getAantalScores();
+            $totaleScore = $score->getTotaleScore();
             $statement = $this->connection->prepare('INSERT INTO score(idprobleemmelding, aantalscores, totalescore) VALUES(?,?,?)');
-            $statement->bindParam(1, $idprobleemmelding, \PDO::PARAM_INT);
+            $statement->bindParam(1, $idProbleemMelding, \PDO::PARAM_INT);
             $statement->bindParam(2, $aantalScores, \PDO::PARAM_INT);
             $statement->bindParam(2, $totaleScore, \PDO::PARAM_INT);
             $statement->execute();

@@ -10,15 +10,14 @@ use Symfony\Component\BrowserKit\Request;
 
 class ProbleemMeldingController extends Controller
 {
-/*
+
     /**
-     * @Route("/show")
+     * @Route("/show/{id}", requirements={"id": "\d+"}, name="probleemMelding_show")
      */
-/*
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $probleemMelding = $em->getRepository(Probleemmelding::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $probleemMelding = $entityManager->getRepository(Probleemmelding::class)->find($id);
 
         return $this->render('AppBundle:ProbleemMelding:show.html.twig', array(
             'probleemMelding' => $probleemMelding
@@ -29,13 +28,11 @@ class ProbleemMeldingController extends Controller
      * Displays a form to edit an existing Post entity.
      *
      * @Route("/{id}/edit", requirements={"id": "\d+"}, name="probleemMelding_edit")
-     * @Method({"GET", "POST"})
      */
-/*
     public function editAction(Probleemmelding $probleemMelding, Request $request)
     {
 
-        $em = $this->getDoctrine()->getManager();
+        $entityManager = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(ProbleemMeldingType::class, $probleemMelding);
 
@@ -43,7 +40,7 @@ class ProbleemMeldingController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em->flush();
+            $entityManager->flush();
 
             $this->addFlash('success', 'updated_successfully');
 
@@ -55,5 +52,4 @@ class ProbleemMeldingController extends Controller
             'form' => $form->createView(),
         ]);
     }
-*/
 }
