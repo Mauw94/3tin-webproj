@@ -24,7 +24,7 @@ class LocatieController extends Controller
     }
 
     /**
-     * @Route("/show/{id}", requirements={"id": "\d+"}, name="locatie_show")
+     * @Route("/showLocatie/{id}", requirements={"id": "\d+"}, name="locatie_show")
      */
     public function showAction($id)
     {

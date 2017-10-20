@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class StatusMeldingController extends Controller
 {
     /**
-     * @Route("/show")
+     * @Route("/showStatusMelding/{id}", requirements={"id": "\d+"}, name="statusMelding_show")
      */
     public function showAction($id)
     {

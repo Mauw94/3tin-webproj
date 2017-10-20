@@ -12,7 +12,7 @@ class ProbleemMeldingController extends Controller
 {
 
     /**
-     * @Route("/show/{id}", requirements={"id": "\d+"}, name="probleemMelding_show")
+     * @Route("/showProbleemMelding/{id}", requirements={"id": "\d+"}, name="probleemMelding_show")
      */
     public function showAction($id)
     {
