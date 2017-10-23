@@ -10,21 +10,7 @@ use Symfony\Component\BrowserKit\Request;
 
 class ProbleemMeldingController extends Controller
 {
-
-    /**
-     * @Route("/showProbleemMelding/{id}", requirements={"id": "\d+"}, name="probleemMelding_show")
-     */
-    public function showAction($id)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $probleemMelding = $entityManager->getRepository(Probleemmelding::class)->find($id);
-
-        return $this->render('AppBundle:ProbleemMelding:show.html.twig', array(
-            'probleemMelding' => $probleemMelding
-        ));
-    }
-
-    /**
+     /**
      * Displays a form to edit an existing Post entity.
      *
      * @Route("/{id}/edit", requirements={"id": "\d+"}, name="probleemMelding_edit")
