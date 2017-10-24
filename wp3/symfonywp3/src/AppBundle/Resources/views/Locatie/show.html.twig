@@ -20,7 +20,8 @@
             <tr>
                 <td>{{ probleemMelding.probleem }}</td>
                 <td class="text-center">{{ probleemMelding.datum | date('d/m/Y') }}</td>
-                <td class="text-center">{% if probleemMelding.IsAfgehandeld %}
+                <td class="text-center">
+                    {% if probleemMelding.IsAfgehandeld %}
                     <i class="fa fa-check"></i>
                     {% else %}
                     <i></i>
