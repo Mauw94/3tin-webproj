@@ -95,7 +95,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
     public function getAfgehandeldeProbleemMeldingen()
     {
         try {
-            $statement = $this->connection->prepare('SELECT * FROM probleemmelding WHERE afgehandeld = TRUE ');
+            $statement = $this->connection->prepare('SELECT * FROM probleemmelding WHERE afgehandeld = 1 ');
             $statement->execute();
 
             $afgehandeldeProbleemMeldingen = $statement->fetchAll(\PDO::FETCH_ASSOC);
