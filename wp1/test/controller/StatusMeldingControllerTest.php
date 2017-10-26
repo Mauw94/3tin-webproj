@@ -44,4 +44,64 @@ class StatusMeldingControllerTest extends TestCase
         $statusmeldingController->handleGetById($statusmelding->getId());
         $this->expectOutputString(sprintf("%s", json_encode($statusmelding)));
     }
+    public function test_handleUpdateStatusMelding()
+    {
+        $statusmeldingJSON = '{"id":0, "locatieid":"1","status":"afgewerkt","datum":"2017-10-26"}';
+        $statusmelding = json_decode($statusmeldingJSON);
+
+        $this->mockStatusMelding->expects($this->atLeastOnce())
+            ->method('updateStatusMelding')
+            ->will($this->returnValue($statusmeldingJSON));
+
+        $this->mockJsonView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object) {
+                $event = $object['toShow'];
+                printf("%s", json_encode($event));
+            }));
+
+        $statusmeldingController = new StatusMeldingController($this->mockStatusMelding, $this->mockJsonView);
+        $statusmeldingController->handleUpdateStatusMelding($statusmeldingJSON);
+        $this->expectOutputString(sprintf("%s", json_encode($statusmelding)));
+    }
+    public function test_addUpdateStatusMelding()
+    {
+        $statusmeldingJSON = '{"id":0, "locatieid":"1","status":"afgewerkt","datum":"2017-10-26"}';
+        $statusmelding = json_decode($statusmeldingJSON);
+
+        $this->mockStatusMelding->expects($this->atLeastOnce())
+            ->method('addStatusMelding')
+            ->will($this->returnValue($statusmeldingJSON));
+
+        $this->mockJsonView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object) {
+                $event = $object['toShow'];
+                printf("%s", json_encode($event));
+            }));
+
+        $statusmeldingController = new StatusMeldingController($this->mockStatusMelding, $this->mockJsonView);
+        $statusmeldingController->handleAddStatusMelding($statusmeldingJSON);
+        $this->expectOutputString(sprintf("%s", json_encode($statusmelding)));
+    }
+    public function test_DeleteStatusMelding()
+    {
+        $statusmeldingJSON = '1';
+        $statusmelding = json_decode($statusmeldingJSON);
+
+        $this->mockStatusMelding->expects($this->atLeastOnce())
+            ->method('deleteStatusMelding')
+            ->will($this->returnValue($statusmeldingJSON));
+
+        $this->mockJsonView->expects($this->atLeastOnce())
+            ->method('show')
+            ->will($this->returnCallback(function ($object) {
+                $event = $object['toShow'];
+                printf("%s", json_encode($event));
+            }));
+
+        $statusmeldingController = new StatusMeldingController($this->mockStatusMelding, $this->mockJsonView);
+        $statusmeldingController->handleDeleteStatusMelding(1);
+        $this->expectOutputString(sprintf("%s", '"rows deleted 1"'));
+    }
 }
