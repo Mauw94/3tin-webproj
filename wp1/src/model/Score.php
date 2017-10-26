@@ -115,9 +115,9 @@ class Score implements \JsonSerializable
     {
         return [
             'id' => $this->id,
-            'idprobleemmelding' => $this->idProbleemMelding,
-            'aantalscores'=>$this->aantalScores,
-            'totalescore' => $this->totaleScore
+            'idprobleemMelding' => $this->idProbleemMelding,
+            'aantalScores'=>$this->aantalScores,
+            'totaleScore' => $this->totaleScore
         ];
     }
 }
