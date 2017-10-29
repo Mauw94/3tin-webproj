@@ -42,7 +42,7 @@ class ScoreControllerTest extends TestCase
                 printf("%s", json_encode($locatie));
             }));
         $scorecontroller = new ScoreController($this->mockScore, $this->mockJsonView);
-        $scorecontroller->getScoreByIdprobleemmelding($score->getId());
+        $scorecontroller->handleGetScoreByIdprobleemmelding($score->getId());
         $this->expectOutputString(sprintf("%s", json_encode($score)));
 
     }
@@ -64,7 +64,7 @@ class ScoreControllerTest extends TestCase
             }));
 
         $scorecontroller = new ScoreController($this->mockScore, $this->mockJsonView);
-        $scorecontroller->updateScoreByIdprobleemmelding($scoreJson);
+        $scorecontroller->handleUpdateScoreByIdprobleemmelding($scoreJson);
         $this->expectOutputString(sprintf("%s", json_encode($score)));
     }
 
@@ -85,7 +85,7 @@ class ScoreControllerTest extends TestCase
             }));
 
         $scorecontroller = new ScoreController($this->mockScore, $this->mockJsonView);
-        $scorecontroller->addScoreByIdprobleemmelding($scoreJson);
+        $scorecontroller->handleAddScoreByIdprobleemmelding($scoreJson);
         $this->expectOutputString(sprintf("%s", json_encode($score)));
     }
 }
