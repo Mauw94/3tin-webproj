@@ -52,6 +52,23 @@ class Probleemmelding
     /**
      * @return int
      */
+    private $score;
+
+    /**
+     * @return mixed
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param mixed $score
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+    }
     public function getLocatieid()
     {
         return $this->locatieid;
