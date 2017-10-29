@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Probleemmelding
  *
- * @ORM\Table(name="probleemmelding", uniqueConstraints={@ORM\UniqueConstraint(name="locatieid", columns={"locatieid"})})
+ * @ORM\Table(name="probleemmelding")
  * @ORM\Entity
  */
 class Probleemmelding
@@ -49,6 +49,61 @@ class Probleemmelding
      */
     private $id;
 
+    /**
+     * @return int
+     */
+    private $score;
 
+    /**
+     * @return mixed
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param mixed $score
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+    }
+    public function getLocatieid()
+    {
+        return $this->locatieid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProbleem()
+    {
+        return $this->probleem;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatum()
+    {
+        return $this->datum;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAfgehandeld()
+    {
+        return $this->afgehandeld;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
 

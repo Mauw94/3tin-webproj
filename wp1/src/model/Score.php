@@ -9,75 +9,82 @@
 namespace model;
 
 
-class Score
+class Score implements \JsonSerializable
 {
     private $id;
-    private $idprobleemmelding;
-    private $aantalscores;
-    private $totalescore;
+    private $idProbleemMelding;
+    private $aantalScores;
+    private $totaleScore;
 
     /**
      * Score constructor.
      * @param $id
-     * @param $idprobleemmelding
-     * @param $aantalscores
-     * @param $totalescore
+     * @param $idProbleemMelding
+     * @param $aantalScores
+     * @param $totaleScore
      */
-    public function __construct($id, $idprobleemmelding, $aantalscores, $totalescore)
+    public function __construct($id, $idProbleemMelding, $aantalScores, $totaleScore)
     {
         $this->id = $id;
-        $this->idprobleemmelding = $idprobleemmelding;
-        $this->aantalscores = $aantalscores;
-        $this->totalescore = $totalescore;
+        $this->idProbleemMelding = $idProbleemMelding;
+        $this->aantalScores = $aantalScores;
+        $this->totaleScore = $totaleScore;
     }
 
 
     /**
      * @return mixed
      */
-    public function getIdprobleemmelding()
+    public function getIdProbleemMelding()
     {
-        return $this->idprobleemmelding;
+        return $this->idProbleemMelding;
     }
 
     /**
-     * @param mixed $idprobleemmelding
+     * @param mixed $idProbleemMelding
      */
-    public function setIdprobleemmelding($idprobleemmelding)
+    public function setIdProbleemMelding($idProbleemMelding)
     {
-        $this->idprobleemmelding = $idprobleemmelding;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAantalscores()
-    {
-        return $this->aantalscores;
-    }
-
-    /**
-     * @param mixed $aantalscores
-     */
-    public function setAantalscores($aantalscores)
-    {
-        $this->aantalscores = $aantalscores;
+        $this->idProbleemMelding = $idProbleemMelding;
     }
 
     /**
      * @return mixed
      */
-    public function getTotalescore()
+    public function getAantalScores()
     {
-        return $this->totalescore;
+        return $this->aantalScores;
+    }
+    /**
+     * @return mixed
+     */
+    public function getGemscores()
+    {
+        return round($this->totaleScore/$this->aantalScores,2);
     }
 
     /**
-     * @param mixed $totalescore
+     * @param mixed $aantalScores
      */
-    public function setTotalescore($totalescore)
+    public function setAantalScores($aantalScores)
     {
-        $this->totalescore = $totalescore;
+        $this->aantalScores = $aantalScores;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotaleScore()
+    {
+        return $this->totaleScore;
+    }
+
+    /**
+     * @param mixed $totaleScore
+     */
+    public function setTotaleScore($totaleScore)
+    {
+        $this->totaleScore = $totaleScore;
     }
 
     /**
@@ -97,5 +104,20 @@ class Score
     }
 
 
-
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'idprobleemMelding' => $this->idProbleemMelding,
+            'aantalScores'=>$this->aantalScores,
+            'totaleScore' => $this->totaleScore
+        ];
+    }
 }

@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yannick
- * Date: 29-9-2017
- * Time: 20:04
- */
 
 namespace controller;
 
 
 use model\ProbleemMelding;
 use model\ProbleemMeldingPDORepository;
+use view\View;
 
 class ProbleemMeldingController
 {
@@ -43,7 +38,7 @@ class ProbleemMeldingController
     public function handleAddProbleemMelding($probleemMelding)
     {
         $decode = json_decode($probleemMelding, true);
-        $newProbleemMelding = new ProbleemMelding(0, $decode['locatieid'], $decode['probleem'], $decode['datum'], $decode['afgehandeld']);
+        $newProbleemMelding = new ProbleemMelding($decode['id'], $decode['locatieid'], $decode['probleem'], $decode['datum'], $decode['afgehandeld']);
         $this->probleemMeldingRepo->addProbleemMelding($newProbleemMelding);
         $this->view->show(['toShow' => $newProbleemMelding]);
     }
@@ -52,5 +47,10 @@ class ProbleemMeldingController
     {
         $afgehandeldeProbleemMeldingen = $this->probleemMeldingRepo->getAfgehandeldeProbleemMeldingen();
         $this->view->show(['toShow' => $afgehandeldeProbleemMeldingen]);
+    }
+
+    public function handleDeleteProbleemMelding(int $id) {
+        $returnValue = 'rows deleted ' . $this->probleemMeldingRepo->deleteProbleemMelding($id);;
+        $this->view->show(['toShow' => $returnValue]);
     }
 }

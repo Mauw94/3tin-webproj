@@ -3,8 +3,6 @@
 namespace model;
 
 
-//use Doctrine\DBAL\Driver\PDOConnection;
-
 class LocatiePDORepository implements LocatieRepository
 {
     private $connection;

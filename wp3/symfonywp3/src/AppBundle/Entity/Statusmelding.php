@@ -42,6 +42,39 @@ class Statusmelding
      */
     private $id;
 
+    /**
+     * @return int
+     */
+    public function getLocatieid(): int
+    {
+        return $this->locatieid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatum(): \DateTime
+    {
+        return $this->datum;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
 
 }
 

@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yannick
- * Date: 6/10/2017
- * Time: 8:46
- */
 
 namespace controller;
 
-
 use model\StatusMelding;
 use model\StatusMeldingPDORepository;
+use view\View;
 
 class StatusMeldingController
 {
@@ -48,4 +42,8 @@ class StatusMeldingController
         $this->view->show(['toShow' => $newStatusMelding]);
     }
 
+    public function handleDeleteStatusMelding(int $id) {
+        $returnValue = 'rows deleted ' . $this->statusMeldingRepo->deleteStatusMelding($id);;
+        $this->view->show(['toShow' => $returnValue]);
+    }
 }
