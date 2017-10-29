@@ -38,7 +38,7 @@ try {
     $router->setBasePath('/');
 
     $router->map('GET', '/', function () {
-        require   'src/view/JsonView.php';
+        require 'src/view/JsonView.php';
     });
 
     $router->map('GET', 'locaties/', function () use (&$locatieController, $requestBody) {
@@ -73,6 +73,10 @@ try {
         $probleemMeldingController->handleGetById($id);
     });
 
+    $router->map('GET', 'problemen/perlocatie/[i:id]', function ($locatieid) use (&$probleemMeldingController) {
+        $probleemMeldingController->handleGetAllByLocatieId($locatieid);
+    });
+
     $router->map('POST', 'problemen/', function () use (&$probleemMeldingController, $requestBody) {
         $probleemMeldingController->handleAddProbleemMelding($requestBody);
     });
@@ -89,7 +93,7 @@ try {
         $statusMeldingController->handleGetAll($requestBody);
     });
 
-    $router->map('GET', 'statussen/[i:id]', function ($id) use(&$statusMeldingController){
+    $router->map('GET', 'statussen/[i:id]', function ($id) use (&$statusMeldingController) {
         $statusMeldingController->handleGetById($id);
     });
 

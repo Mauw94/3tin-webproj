@@ -27,6 +27,12 @@ class ProbleemMeldingController
         $this->view->show(['toShow' => $probleemMelding]);
     }
 
+    public function handleGetAllByLocatieId(int $locatieid)
+    {
+        $probleemMeldingen = $this->probleemMeldingRepo->getAllProblemenByLocatieId($locatieid);
+        $this->view->show(['toShow' => $probleemMeldingen]);
+    }
+
     public function handleUpdateProbleemMelding($probleemMelding)
     {
         $decode = json_decode($probleemMelding, true);
@@ -49,7 +55,8 @@ class ProbleemMeldingController
         $this->view->show(['toShow' => $afgehandeldeProbleemMeldingen]);
     }
 
-    public function handleDeleteProbleemMelding(int $id) {
+    public function handleDeleteProbleemMelding(int $id)
+    {
         $returnValue = 'rows deleted ' . $this->probleemMeldingRepo->deleteProbleemMelding($id);;
         $this->view->show(['toShow' => $returnValue]);
     }
