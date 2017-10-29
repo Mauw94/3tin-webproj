@@ -44,7 +44,9 @@ class ProbleemMeldingController extends Controller
      * @Route("/{id}/score/{score}", requirements={"id": "\d+"}, name="score_edit")
      */
     public function addScore(Request $request){
-        
+        //$id = id from url
+        //$score = score from url
+        $id = 0;
         $entityManager = $this->getDoctrine()->getManager();
 
         print_r($request);
