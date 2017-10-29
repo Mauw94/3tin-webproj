@@ -9,6 +9,8 @@ use controller\StatusMeldingController;
 use model\ProbleemMeldingPDORepository;
 use controller\ProbleemMeldingController;
 use controller\LocatieController;
+use controller\ScoreController;
+use model\ScorePDORepository;
 
 $container = require __DIR__ . '/src/app/container.php';
 $pdo = null;
@@ -33,6 +35,9 @@ try {
 
     $statusMeldingRepo = new StatusMeldingPDORepository($pdo);
     $statusMeldingController = new StatusMeldingController($statusMeldingRepo, $jsonView);
+
+    $scoreRepo = new ScorePDORepository($pdo);
+    $scoreController = new ScoreController($scoreRepo,$jsonView);
 
     $router = new AltoRouter();
     $router->setBasePath('/');
@@ -107,6 +112,17 @@ try {
 
     $router->map('DELETE', 'statussen/[i:id]', function ($id) use (&$statusMeldingController) {
         $statusMeldingController->handleDeleteStatusMelding($id);
+    });
+
+    $router->map('GET', 'scoreprobleem/[i:id]', function ($id) use (&$scoreController) {
+        $scoreController->handleGetScoreByIdprobleemmelding($id);
+    });
+
+    $router->map('POST', 'score', function () use (&$scoreController, $requestBody) {
+        $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
+    });
+    $router->map('PUT', 'score', function () use (&$scoreController, $requestBody) {
+        $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
     });
 
     $match = $router->match();

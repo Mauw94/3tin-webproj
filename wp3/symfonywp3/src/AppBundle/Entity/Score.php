@@ -42,6 +42,70 @@ class Score
      */
     private $id;
 
+    /**
+     * @return int
+     */
+    public function getIdprobleemmelding(): int
+    {
+        return $this->idprobleemmelding;
+    }
+
+    /**
+     * @param int $idprobleemmelding
+     */
+    public function setIdprobleemmelding(int $idprobleemmelding)
+    {
+        $this->idprobleemmelding = $idprobleemmelding;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAantalscores(): int
+    {
+        return $this->aantalscores;
+    }
+
+    /**
+     * @param int $aantalscores
+     */
+    public function setAantalscores(int $aantalscores)
+    {
+        $this->aantalscores = $aantalscores;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalescore(): int
+    {
+        return $this->totalescore;
+    }
+
+    /**
+     * @param int $totalescore
+     */
+    public function setTotalescore(int $totalescore)
+    {
+        $this->totalescore = $totalescore;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
 
 }
 

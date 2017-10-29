@@ -38,4 +38,28 @@ class ProbleemMeldingController extends Controller
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * Adds a new score.
+     *
+     * @Route("/{id}/score/{score}", requirements={"id": "\d+"}, name="score_edit")
+     */
+    public function addScore(Request $request){
+        //$id = id from url
+        //$score = score from url
+        $id = 0;
+        $entityManager = $this->getDoctrine()->getManager();
+
+        print_r($request);
+        $score=$entityManager->getRepository(Score::class)->findBy(
+            array(
+                'idprobleemmelding'=> $id
+            )
+
+        );
+       if ($score ==null){
+           echo 'create new score';
+       }else{
+           echo 'update score';
+       }
+    }
 }
