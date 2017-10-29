@@ -118,10 +118,10 @@ try {
         $scoreController->handleGetScoreByIdprobleemmelding($id);
     });
 
-    $router->map('POST', 'score', function () use (&$scoreController, $requestBody) {
+    $router->map('POST', 'score/', function () use (&$scoreController, $requestBody) {
         $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
     });
-    $router->map('PUT', 'score', function () use (&$scoreController, $requestBody) {
+    $router->map('PUT', 'score/', function () use (&$scoreController, $requestBody) {
         $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
     });
 

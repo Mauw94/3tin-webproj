@@ -27,6 +27,7 @@ class ScorePDORepository implements ScoreRepository
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($result > 0) {
+                //var_dump($result);
                 return new Score($result[0]['id'], $result[0]['idprobleemmelding'],  $result[0]['aantalscores'],  $result[0]['totalescore']);
             } else {
                 return null;
