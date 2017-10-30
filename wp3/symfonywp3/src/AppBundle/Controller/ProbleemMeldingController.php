@@ -7,6 +7,7 @@ use AppBundle\Form\ProbleemMeldingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Request;
+use AppBundle\Entity\Score;
 
 class ProbleemMeldingController extends Controller
 {
@@ -43,23 +44,25 @@ class ProbleemMeldingController extends Controller
      *
      * @Route("/{id}/score/{score}", requirements={"id": "\d+"}, name="score_edit")
      */
-    public function addScore(Request $request){
+    public function addScore($id,$score){
         //$id = id from url
         //$score = score from url
-        $id = 0;
         $entityManager = $this->getDoctrine()->getManager();
 
-        print_r($request);
         $score=$entityManager->getRepository(Score::class)->findBy(
             array(
                 'idprobleemmelding'=> $id
             )
 
         );
-       if ($score ==null){
+       if ($score[0] ==null){
            echo 'create new score';
        }else{
+           print_r($score[0]);
+           $score[0]['aantalscores']= $score['aantalscores']+1;
+           $score[0]['totalescore']= $score['totalescore']+$score;
            echo 'update score';
+           print_r($score[0]);
        }
     }
 }
