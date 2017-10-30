@@ -92,7 +92,16 @@
         function send(clicked_id) {
             var id = clicked_id.split("-").pop();
             var score = document.getElementById('input-'+id).value;
-            document.location.href = '/'+id+'/score/'+score;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert('success');
+                }
+            };
+            xhttp.open("GET", '/'+id+'/score/'+score, true);
+            xhttp.send();
+            
             return false;
         }
     </script>

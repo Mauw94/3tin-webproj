@@ -43,6 +43,19 @@ class Score
     private $id;
 
     /**
+     * Score constructor.
+     * @param int $idprobleemmelding
+     * @param int $aantalscores
+     * @param int $totalescore
+     */
+    public function __construct($idprobleemmelding, $aantalscores, $totalescore)
+    {
+        $this->idprobleemmelding = $idprobleemmelding;
+        $this->aantalscores = $aantalscores;
+        $this->totalescore = $totalescore;
+    }
+
+    /**
      * @return int
      */
     public function getIdprobleemmelding(): int

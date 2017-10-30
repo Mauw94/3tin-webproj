@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Request;
 use AppBundle\Entity\Score;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProbleemMeldingController extends Controller
 {
@@ -42,11 +43,9 @@ class ProbleemMeldingController extends Controller
     /**
      * Adds a new score.
      *
-     * @Route("/{id}/score/{score}", requirements={"id": "\d+"}, name="score_edit")
+     * @Route("/{id}/score/{scoreP}", requirements={"id": "\d+"}, name="score_edit")
      */
-    public function addScore($id,$score){
-        //$id = id from url
-        //$score = score from url
+    public function addScore($id,$scoreP){
         $entityManager = $this->getDoctrine()->getManager();
 
         $score=$entityManager->getRepository(Score::class)->findBy(
@@ -56,13 +55,16 @@ class ProbleemMeldingController extends Controller
 
         );
        if ($score[0] ==null){
-           echo 'create new score';
+           $newScore = new Score($id,1,$scoreP);
+           $entityManager->persist($newScore);
+           $entityManager->flush();
        }else{
-           print_r($score[0]);
-           $score[0]['aantalscores']= $score['aantalscores']+1;
-           $score[0]['totalescore']= $score['totalescore']+$score;
-           echo 'update score';
-           print_r($score[0]);
+           $score[0]->setTotalescore($score[0]->getTotalescore()+$scoreP);
+           $score[0]->setAantalscores($score[0]->getAantalscores()+1);
+           $entityManager->merge($score[0]);
+
        }
+       return new Response();
+
     }
 }
