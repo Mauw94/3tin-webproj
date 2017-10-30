@@ -54,7 +54,7 @@ class ProbleemMeldingController extends Controller
             )
 
         );
-       if ($score[0] ==null){
+       if ($score==null || $score[0] ==null){
            $newScore = new Score($id,1,$scoreP);
            $entityManager->persist($newScore);
            $entityManager->flush();

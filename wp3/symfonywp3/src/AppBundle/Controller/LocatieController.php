@@ -44,8 +44,11 @@ class LocatieController extends Controller
                     )
 
                 );
-                $scores[]=$score[0];
-                $probleem->setScore($score[0]->getTotalescore()/$score[0]->getAantalScores());
+                if($score != null&&$score[0]!= null){
+                    $scores[]=$score[0];
+                    $probleem->setScore($score[0]->getTotalescore()/$score[0]->getAantalScores());
+                }
+
             }
 
 
