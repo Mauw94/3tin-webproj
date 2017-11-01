@@ -40,14 +40,14 @@ class ScorePDORepository implements ScoreRepository
     public function updateScoreByIdprobleemmelding(Score $score)
     {
         try {
-            $id = $score->getId();
+            $idprobleemmelding = $score->getIdProbleemMelding();
             $aantalScores = $score->getAantalScores();
             $totaleScore = $score->getTotaleScore();
 
-            $statement = $this->connection->prepare('UPDATE score SET aantalscores=?,totalescore=? WHERE id=?');
+            $statement = $this->connection->prepare('UPDATE score SET aantalscores=?,totalescore=? WHERE idprobleemmelding=?');
             $statement->bindParam(1, $aantalScores, \PDO::PARAM_INT);
             $statement->bindParam(2, $totaleScore, \PDO::PARAM_INT);
-            $statement->bindParam(3, $id, \PDO::PARAM_INT);
+            $statement->bindParam(3, $idprobleemmelding, \PDO::PARAM_INT);
             $statement->execute();
 
             return $score;
