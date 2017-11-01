@@ -44,7 +44,7 @@ class ScorePDORepository implements ScoreRepository
             $aantalScores = $score->getAantalScores();
             $totaleScore = $score->getTotaleScore();
 
-            $statement = $this->connection->prepare('UPDATE score SET aantalScores=?,totaleScore=? WHERE id=?');
+            $statement = $this->connection->prepare('UPDATE score SET aantalscores=?,totalescore=? WHERE id=?');
             $statement->bindParam(1, $aantalScores, \PDO::PARAM_INT);
             $statement->bindParam(2, $totaleScore, \PDO::PARAM_INT);
             $statement->bindParam(3, $id, \PDO::PARAM_INT);

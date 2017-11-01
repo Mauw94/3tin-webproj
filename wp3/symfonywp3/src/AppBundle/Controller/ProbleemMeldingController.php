@@ -62,6 +62,7 @@ class ProbleemMeldingController extends Controller
            $score[0]->setTotalescore($score[0]->getTotalescore()+$scoreP);
            $score[0]->setAantalscores($score[0]->getAantalscores()+1);
            $entityManager->merge($score[0]);
+           $entityManager->flush();
 
        }
        return new Response();
