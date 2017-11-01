@@ -37,7 +37,7 @@ try {
     $statusMeldingController = new StatusMeldingController($statusMeldingRepo, $jsonView);
 
     $scoreRepo = new ScorePDORepository($pdo);
-    $scoreController = new ScoreController($scoreRepo,$jsonView);
+    $scoreController = new ScoreController($scoreRepo, $jsonView);
 
     $router = new AltoRouter();
     $router->setBasePath('/');
@@ -112,6 +112,10 @@ try {
 
     $router->map('DELETE', 'statussen/[i:id]', function ($id) use (&$statusMeldingController) {
         $statusMeldingController->handleDeleteStatusMelding($id);
+    });
+
+    $router->map('GET', 'statussen/perlocatie/[i:id]', function ($locatieid) use (&$statusMeldingController) {
+        $statusMeldingController->handleGetStatusByLocatie($locatieid);
     });
 
     $router->map('GET', 'scoreprobleem/[i:id]', function ($id) use (&$scoreController) {

@@ -26,6 +26,12 @@ class StatusMeldingController
         $this->view->show(['toShow' => $statusMelding]);
     }
 
+    public function handleGetStatusByLocatie(int $locatieId)
+    {
+        $statusMelding = $this->statusMeldingRepo->getStatusByLocatieId($locatieId);
+        $this->view->show(['toShow' => $statusMelding]);
+    }
+
     public function handleUpdateStatusMelding($statusMelding)
     {
         $decode = json_decode($statusMelding, true);
@@ -42,7 +48,8 @@ class StatusMeldingController
         $this->view->show(['toShow' => $newStatusMelding]);
     }
 
-    public function handleDeleteStatusMelding(int $id) {
+    public function handleDeleteStatusMelding(int $id)
+    {
         $returnValue = 'rows deleted ' . $this->statusMeldingRepo->deleteStatusMelding($id);;
         $this->view->show(['toShow' => $returnValue]);
     }
