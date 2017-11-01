@@ -67,3 +67,18 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+monolog:
+    handlers:
+        # this "file_log" key could be anything
+        file_log:
+            type: stream
+            # log to var/logs/(environment).log
+            path: "/var/log/symfony.log"
+            # log *all* messages (debug is lowest level)
+            level: info
+
+        syslog_handler:
+            type: syslog
+            # log debug-level messages and higher
+            level: error

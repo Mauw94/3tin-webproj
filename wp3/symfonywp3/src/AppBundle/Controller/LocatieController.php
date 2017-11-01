@@ -8,14 +8,18 @@ use AppBundle\Entity\Score;
 use AppBundle\Entity\Statusmelding;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Psr\Log\LoggerInterface;
 
 class LocatieController extends Controller
 {
     /**
      * @Route("/index")
      */
-    public function indexAction()
+    public function indexAction(LoggerInterface $logger)
     {
+        //$logger = $this->get('logger');
+        $logger->info('Location constructor');
+
         $entityManager = $this->getDoctrine()->getManager();
         $locaties= $entityManager->getRepository(Locatie::class)->findAll();
 
@@ -27,8 +31,11 @@ class LocatieController extends Controller
     /**
      * @Route("/showLocatie/{id}", requirements={"id": "\d+"}, name="locatie_show")
      */
-    public function showAction($id)
+    public function showAction($id,LoggerInterface $logger)
     {
+        //$logger = $this->get('logger');
+        $logger->info('Show Action location controller');
+
         $entityManager = $this->getDoctrine()->getManager();
         $probleemMeldingen= $entityManager->getRepository(Probleemmelding::class)->findBy(
             array('locatieid' => $id)

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Request;
 use AppBundle\Entity\Score;
 use Symfony\Component\HttpFoundation\Response;
+use Psr\Log\LoggerInterface;
 
 class ProbleemMeldingController extends Controller
 {
@@ -17,8 +18,10 @@ class ProbleemMeldingController extends Controller
      *
      * @Route("/{id}/edit", requirements={"id": "\d+"}, name="probleemMelding_edit")
      */
-    public function editAction(Probleemmelding $probleemMelding, Request $request)
+    public function editAction(LoggerInterface $logger,Probleemmelding $probleemMelding, Request $request)
     {
+        //$logger = $this->get('logger');
+        $logger->info('Edit Action probleemmelding controller');
 
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -45,7 +48,10 @@ class ProbleemMeldingController extends Controller
      *
      * @Route("/{id}/score/{scoreP}", requirements={"id": "\d+"}, name="score_edit")
      */
-    public function addScore($id,$scoreP){
+    public function addScore(LoggerInterface $logger,$id,$scoreP){
+        //$logger = $this->get('logger');
+        $logger->info('Add Score probleemmelding controller');
+
         $entityManager = $this->getDoctrine()->getManager();
 
         $score=$entityManager->getRepository(Score::class)->findBy(

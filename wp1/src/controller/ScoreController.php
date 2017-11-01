@@ -27,8 +27,8 @@ class ScoreController
     {
         $decode = json_decode($score, true);
         $newScore = new Score((int)$decode['id'], $decode['idprobleemMelding'], $decode['aantalScores'], $decode['totaleScore']);
-        $this->Repo->updateScoreByIdprobleemmelding($newScore);
-        $this->view->show(['toShow' => $newScore]);
+        $returnScore = $this->Repo->updateScoreByIdprobleemmelding($newScore);
+        $this->view->show(['toShow' => $returnScore]);
     }
 
     public function handleAddScoreByIdprobleemmelding($score)
