@@ -17,13 +17,13 @@ class ScoreController
         $this->view = $view;
     }
 
-    public function getScoreByIdprobleemmelding(int $id)
+    public function handleGetScoreByIdprobleemmelding(int $id)
     {
         $score = $this->Repo->getScoreByIdprobleemmelding($id);
         $this->view->show(['toShow' => $score]);
     }
 
-    public function updateScoreByIdprobleemmelding($score)
+    public function handleUpdateScoreByIdprobleemmelding($score)
     {
         $decode = json_decode($score, true);
         $newScore = new Score((int)$decode['id'], $decode['idprobleemMelding'], $decode['aantalScores'], $decode['totaleScore']);
@@ -31,7 +31,7 @@ class ScoreController
         $this->view->show(['toShow' => $newScore]);
     }
 
-    public function addScoreByIdprobleemmelding($score)
+    public function handleAddScoreByIdprobleemmelding($score)
     {
         $decode = json_decode($score, true);
         $newScore = new Score((int)$decode['id'], $decode['idprobleemMelding'], $decode['aantalScores'], $decode['totaleScore']);

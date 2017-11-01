@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Locatie;
 use AppBundle\Entity\Probleemmelding;
+use AppBundle\Entity\Score;
 use AppBundle\Entity\Statusmelding;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -35,6 +36,22 @@ class LocatieController extends Controller
          $statusMeldingen = $entityManager->getRepository(Statusmelding::class)->findBy(
              array('locatieid' => $id)
          )  ;
+            $scores=[];
+            foreach ($probleemMeldingen as $probleem){
+                $score=$entityManager->getRepository(Score::class)->findBy(
+                    array(
+                      'idprobleemmelding'=> $probleem->getId()
+                    )
+
+                );
+                if($score != null&&$score[0]!= null){
+                    $scores[]=$score[0];
+                    $probleem->setScore($score[0]->getTotalescore()/$score[0]->getAantalScores());
+                }
+
+            }
+
+
         return $this->render('AppBundle:Locatie:show.html.twig', array(
             'probleemMeldingen' => $probleemMeldingen,
             'statusMeldingen' => $statusMeldingen

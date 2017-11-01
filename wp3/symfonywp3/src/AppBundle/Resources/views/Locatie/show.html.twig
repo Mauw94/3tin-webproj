@@ -11,6 +11,8 @@
             <th scope="col">Probleem</th>
             <th scope="col" class="text-center"><i class="fa fa-calendar" aria-hidden="true"></i>Datum</th>
             <th scope="col" class="text-center"><i class="fa fa-check"></i>Afgehandeld</th>
+            <th scope="col">Score</th>
+            <th scope="col">Beoordeel</th>
             <th scope="col" class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
         </tr>
         </thead>
@@ -28,8 +30,26 @@
                     {% endif %}
                 </td>
                 <td class="text-center">
+                    {% if probleemMelding.Score%}
+                        <i>{{ probleemMelding.Score }}</i>
+                    {% else %}
+                        <i>Geen score gevonden.</i>
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    {% if probleemMelding.IsAfgehandeld %}
+                        <i><input type="number" min="0" max="5" id="input-{{ probleemMelding.id }}">
+                            <a href="#" onclick="send(this.id)" class="btn btn-sm btn-default" id="button-{{ probleemMelding.id }}">
+                                Beoordeel
+                            </a>
+                        </i>
+                    {% else %}
+                        <i>Nog niet beoordeelbaar.</i>
+                    {% endif %}
+                </td>
+                <td class="text-center">
                     <div class="item-actions">
-                        <a href="" class="btn btn-sm btn-default">
+                        <a class="btn btn-sm btn-default">
                             Toekennen Technicus
                         </a>
                     </div>
@@ -68,6 +88,23 @@
     {% endfor %}
     </tbody>
 </table>
+    <script>
+        function send(clicked_id) {
+            var id = clicked_id.split("-").pop();
+            var score = document.getElementById('input-'+id).value;
 
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert('success');
+                }
+            };
+            xhttp.open("GET", '/'+id+'/score/'+score, true);
+            xhttp.send();
+
+            return false;
+        }
+    </script>
 {% endblock %}
+
 

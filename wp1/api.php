@@ -9,6 +9,8 @@ use controller\StatusMeldingController;
 use model\ProbleemMeldingPDORepository;
 use controller\ProbleemMeldingController;
 use controller\LocatieController;
+use controller\ScoreController;
+use model\ScorePDORepository;
 
 $container = require __DIR__ . '/src/app/container.php';
 $pdo = null;
@@ -34,11 +36,14 @@ try {
     $statusMeldingRepo = new StatusMeldingPDORepository($pdo);
     $statusMeldingController = new StatusMeldingController($statusMeldingRepo, $jsonView);
 
+    $scoreRepo = new ScorePDORepository($pdo);
+    $scoreController = new ScoreController($scoreRepo,$jsonView);
+
     $router = new AltoRouter();
     $router->setBasePath('/');
 
     $router->map('GET', '/', function () {
-        require   'src/view/JsonView.php';
+        require 'src/view/JsonView.php';
     });
 
     $router->map('GET', 'locaties/', function () use (&$locatieController, $requestBody) {
@@ -73,6 +78,10 @@ try {
         $probleemMeldingController->handleGetById($id);
     });
 
+    $router->map('GET', 'problemen/perlocatie/[i:id]', function ($locatieid) use (&$probleemMeldingController) {
+        $probleemMeldingController->handleGetAllByLocatieId($locatieid);
+    });
+
     $router->map('POST', 'problemen/', function () use (&$probleemMeldingController, $requestBody) {
         $probleemMeldingController->handleAddProbleemMelding($requestBody);
     });
@@ -89,7 +98,7 @@ try {
         $statusMeldingController->handleGetAll($requestBody);
     });
 
-    $router->map('GET', 'statussen/[i:id]', function ($id) use(&$statusMeldingController){
+    $router->map('GET', 'statussen/[i:id]', function ($id) use (&$statusMeldingController) {
         $statusMeldingController->handleGetById($id);
     });
 
@@ -103,6 +112,17 @@ try {
 
     $router->map('DELETE', 'statussen/[i:id]', function ($id) use (&$statusMeldingController) {
         $statusMeldingController->handleDeleteStatusMelding($id);
+    });
+
+    $router->map('GET', 'scoreprobleem/[i:id]', function ($id) use (&$scoreController) {
+        $scoreController->handleGetScoreByIdprobleemmelding($id);
+    });
+
+    $router->map('POST', 'score/', function () use (&$scoreController, $requestBody) {
+        $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
+    });
+    $router->map('PUT', 'score/', function () use (&$scoreController, $requestBody) {
+        $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
     });
 
     $match = $router->match();

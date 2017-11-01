@@ -38,7 +38,27 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $probleemMelding = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($probleemMelding > 0) {
-            return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[0]['locatieid'],$probleemMelding[0]['probleem'], $probleemMelding[0]['datum'], $probleemMelding[0]['afgehandeld'],$probleemMelding[0]['updownvote']);
+                return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[0]['locatieid'],
+                    $probleemMelding[0]['probleem'], $probleemMelding[0]['datum'],
+                    $probleemMelding[0]['afgehandeld'],$probleemMelding[0]['updownvote']);
+            } else {
+                return null;
+            }
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    public function getAllProblemenByLocatieId(int $locatieId)
+    {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM probleemmelding WHERE locatieid=?");
+            $statement->bindParam(1, $locatieId, \PDO::PARAM_INT);
+            $statement->execute();
+            $probleemMeldingen = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            if ($probleemMeldingen > 0) {
+                return $probleemMeldingen;
             } else {
                 return null;
             }
@@ -64,7 +84,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $statement->bindParam(5, $afgehandeld, \PDO::PARAM_BOOL);
             $statement->bindParam(6, $upDownVote,\PDO::PARAM_INT);
 
-            print_r( $statement->execute());
+            print_r($statement->execute());
             return $probleemMelding;
         } catch (\Exception $exception) {
             print $exception->getMessage();
