@@ -60,13 +60,15 @@ class ScorePDORepository implements ScoreRepository
     public function addScoreByIdprobleemmelding(Score $score)
     {
         try {
+            $id = $score->getId();
             $idProbleemMelding = $score->getIdProbleemMelding();
             $aantalScores = $score->getAantalScores();
             $totaleScore = $score->getTotaleScore();
-            $statement = $this->connection->prepare('INSERT INTO score(idprobleemmelding, aantalscores, totalescore) VALUES(?,?,?)');
+            $statement = $this->connection->prepare('INSERT INTO score(id, idprobleemmelding, aantalscores, totalescore) VALUES(?,?,?,?)');
             $statement->bindParam(1, $idProbleemMelding, \PDO::PARAM_INT);
-            $statement->bindParam(2, $aantalScores, \PDO::PARAM_INT);
-            $statement->bindParam(2, $totaleScore, \PDO::PARAM_INT);
+            $statement->bindParam(2, $idProbleemMelding, \PDO::PARAM_INT);
+            $statement->bindParam(3, $aantalScores, \PDO::PARAM_INT);
+            $statement->bindParam(4, $totaleScore, \PDO::PARAM_INT);
             $statement->execute();
             return $score;
         } catch (\Exception $exception) {

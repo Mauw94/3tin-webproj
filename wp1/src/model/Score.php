@@ -55,12 +55,13 @@ class Score implements \JsonSerializable
     {
         return $this->aantalScores;
     }
+
     /**
      * @return mixed
      */
     public function getGemscores()
     {
-        return round($this->totaleScore/$this->aantalScores,2);
+        return round($this->totaleScore / $this->aantalScores, 2);
     }
 
     /**
@@ -116,7 +117,7 @@ class Score implements \JsonSerializable
         return [
             'id' => $this->id,
             'idprobleemMelding' => $this->idProbleemMelding,
-            'aantalScores'=>$this->aantalScores,
+            'aantalScores' => $this->aantalScores,
             'totaleScore' => $this->totaleScore
         ];
     }
