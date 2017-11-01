@@ -65,7 +65,7 @@ class ScorePDORepository implements ScoreRepository
             $aantalScores = $score->getAantalScores();
             $totaleScore = $score->getTotaleScore();
             $statement = $this->connection->prepare('INSERT INTO score(id, idprobleemmelding, aantalscores, totalescore) VALUES(?,?,?,?)');
-            $statement->bindParam(1, $idProbleemMelding, \PDO::PARAM_INT);
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->bindParam(2, $idProbleemMelding, \PDO::PARAM_INT);
             $statement->bindParam(3, $aantalScores, \PDO::PARAM_INT);
             $statement->bindParam(4, $totaleScore, \PDO::PARAM_INT);
