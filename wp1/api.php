@@ -42,10 +42,6 @@ try {
     $router = new AltoRouter();
     $router->setBasePath('/');
 
-    $router->map('GET', '/', function () {
-        require 'src/view/JsonView.php';
-    });
-
     $router->map('GET', 'locaties/', function () use (&$locatieController, $requestBody) {
         $locatieController->handleGetAll($requestBody);
     });
@@ -125,6 +121,7 @@ try {
     $router->map('POST', 'score/', function () use (&$scoreController, $requestBody) {
         $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
     });
+
     $router->map('PUT', 'score/', function () use (&$scoreController, $requestBody) {
         $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
     });

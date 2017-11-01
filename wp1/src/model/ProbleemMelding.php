@@ -6,29 +6,29 @@ namespace model;
 class ProbleemMelding implements \JsonSerializable
 {
     private $id;
-    private $locatieId;
+    private $locatieid;
     private $probleem;
     private $datum;
     private $afgehandeld;
-    private $upDownVote;
+    private $updownvote;
 
     /**
-     * probleemMelding constructor.
+     * ProbleemMelding constructor.
      * @param $id
-     * @param $locatieId
+     * @param $locatieid
      * @param $probleem
      * @param $datum
      * @param $afgehandeld
-     * @param $upDownVote
+     * @param $updownvote
      */
-    public function __construct($id, $locatieId, $probleem, $datum, $afgehandeld, $upDownVote)
+    public function __construct($id, $locatieid, $probleem, $datum, $afgehandeld, $updownvote)
     {
         $this->id = $id;
-        $this->locatieId = $locatieId;
+        $this->locatieid = $locatieid;
         $this->probleem = $probleem;
         $this->datum = $datum;
-        $this->afgehandeld=$afgehandeld;
-        $this->upDownVote = $upDownVote;
+        $this->afgehandeld = $afgehandeld;
+        $this->updownvote = $updownvote;
     }
 
     /**
@@ -50,17 +50,17 @@ class ProbleemMelding implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getLocatieId()
+    public function getLocatieid()
     {
-        return $this->locatieId;
+        return $this->locatieid;
     }
 
     /**
-     * @param mixed $locatieId
+     * @param mixed $locatieid
      */
-    public function setLocatieId($locatieId)
+    public function setLocatieid($locatieid)
     {
-        $this->locatieId = $locatieId;
+        $this->locatieid = $locatieid;
     }
 
     /**
@@ -114,35 +114,29 @@ class ProbleemMelding implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getUpDownVote()
+    public function getUpdownvote()
     {
-        return $this->UpDownVote;
+        return $this->updownvote;
     }
 
     /**
-     * @param mixed $UpDownVote
+     * @param mixed $updownvote
      */
-    public function setUpDownVote($UpDownVote)
+    public function setUpdownvote($updownvote)
     {
-        $this->UpDownVote = $UpDownVote;
+        $this->updownvote = $updownvote;
     }
 
-    /**
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     * @since 5.4.0
-     */
+
     public function jsonSerialize()
     {
-        return[
-            'id' => $this->id,
-            'locatieid' => $this->locatieId,
-            'probleem' => $this->probleem,
-            'datum' => $this->datum,
-            'afgehandeld' => $this->afgehandeld,
-            'updownvote' => $this->upDownVote
+        return [
+            "id" => $this->id,
+            "locatieid" => $this->locatieid,
+            "probleem" => $this->probleem,
+            "datum" => $this->datum,
+            "afgehandeld" => $this->afgehandeld,
+            "updownvote" => $this->updownvote
         ];
     }
 }
