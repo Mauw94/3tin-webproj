@@ -38,7 +38,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $probleemMelding = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($probleemMelding > 0) {
-            return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[0]['locatieid'],$probleemMelding[0]['probleem'], $probleemMelding[0]['datum'], $probleemMelding[0]['afgehandeld']);
+            return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[0]['locatieid'],$probleemMelding[0]['probleem'], $probleemMelding[0]['datum'], $probleemMelding[0]['afgehandeld'],$probleemMelding[0]['updownvote']);
             } else {
                 return null;
             }
@@ -55,12 +55,14 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $probleem = $probleemMelding->getProbleem();
             $datum = $probleemMelding->getDatum();
             $afgehandeld = $probleemMelding->getAfgehandeld();
-            $statement = $this->connection->prepare('INSERT INTO probleemmelding(id, locatieid, probleem, datum, afgehandeld) VALUES(?,?,?,?,?)');
+            $upDownVote = $probleemMelding->getUpDownVote();
+            $statement = $this->connection->prepare('INSERT INTO probleemmelding(id, locatieid, probleem, datum, afgehandeld, updownvote) VALUES(?,?,?,?,?,?)');
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->bindParam(2, $locatieId, \PDO::PARAM_INT);
             $statement->bindParam(3, $probleem, \PDO::PARAM_STR);
             $statement->bindParam(4, $datum, \PDO::PARAM_STR);
             $statement->bindParam(5, $afgehandeld, \PDO::PARAM_BOOL);
+            $statement->bindParam(6, $upDownVote,\PDO::PARAM_INT);
 
             print_r( $statement->execute());
             return $probleemMelding;
@@ -78,12 +80,14 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $probleem = $probleemMelding->getProbleem();
             $datum = $probleemMelding->getDatum();
             $afgehandeld = $probleemMelding->getAfgehandeld();
-            $statement = $this->connection->prepare('UPDATE probleemmelding SET locatieid=?,probleem=?,datum=?,afgehandeld=? WHERE id=?');
+            $upDownVote = $probleemMelding->getUpDownVote();
+            $statement = $this->connection->prepare('UPDATE probleemmelding SET locatieid=?,probleem=?,datum=?,afgehandeld=?,updownvote=? WHERE id=?');
             $statement->bindParam(1, $locatieId, \PDO::PARAM_INT);
             $statement->bindParam(2, $probleem, \PDO::PARAM_STR);
             $statement->bindParam(3, $datum, \PDO::PARAM_STR);
             $statement->bindParam(4, $afgehandeld, \PDO::PARAM_BOOL);
-            $statement->bindParam(5, $id, \PDO::PARAM_INT);
+            $statement->bindParam(5,$upDownVote,\PDO::PARAM_INT);
+            $statement->bindParam(6, $id, \PDO::PARAM_INT);
             $statement->execute();
 
             return $probleemMelding;
@@ -117,5 +121,35 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
         } catch (\Exception $exception) {
             return null;
         }
+    }
+
+    public function getUpDownVote(int $id)
+    {
+        try {
+            $statement = $this->connection->prepare('SELECT updownvote FROM probleemmelding WHERE id = ? ');
+            $statement->bindParam(1, $id, \PDO::PARAM_INT);
+            $statement->execute();
+
+            $upDownVote = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            return $upDownVote;
+        } catch (\Exception $exception) {
+            return null;
+        }
+
+    }
+
+    public function updateUpDownVote(int $id, int $upDownVote)
+    {
+        try {
+            $statement = $this->connection->prepare('UPDATE probleemmelding SET updownvote=? WHERE id=?');
+            $statement->bindParam(1,$upDownVote,\PDO::PARAM_INT);
+            $statement->bindParam(2, $id, \PDO::PARAM_INT);
+            $statement->execute();
+
+            return $upDownVote;
+        } catch (\Exception $exception) {
+            return null;
+        }
+
     }
 }

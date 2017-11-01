@@ -49,8 +49,25 @@ class ProbleemMeldingController
         $this->view->show(['toShow' => $afgehandeldeProbleemMeldingen]);
     }
 
-    public function handleDeleteProbleemMelding(int $id) {
+    public function handleDeleteProbleemMelding($id) {
         $returnValue = 'rows deleted ' . $this->probleemMeldingRepo->deleteProbleemMelding($id);;
         $this->view->show(['toShow' => $returnValue]);
+    }
+
+    public function handleUpVote($id){
+        $upVote = $this->probleemMeldingRepo->getUpDownVote($id) + 1;
+        $this->probleemMeldingRepo->updateUpDownVote($id,$upVote);
+        $this->view->show(['toShow' => $upVote]);
+    }
+
+    public function handleDownVote($id){
+        $downVote = $this->probleemMeldingRepo->getUpDownVote($id) - 1;
+        $this->probleemMeldingRepo->updateUpDownVote($id,$downVote);
+        $this->view->show(['toShow' => $downVote]);
+    }
+
+    public function handleGetUpDownVote($id){
+        $upDownVote = $this->probleemMeldingRepo->getUpDownVote($id);
+        $this->view->show(['toShow' => $upDownVote]);
     }
 }

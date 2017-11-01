@@ -10,7 +10,7 @@ class ProbleemMelding implements \JsonSerializable
     private $probleem;
     private $datum;
     private $afgehandeld;
-
+    private $upDownVote;
 
     /**
      * probleemMelding constructor.
@@ -19,14 +19,16 @@ class ProbleemMelding implements \JsonSerializable
      * @param $probleem
      * @param $datum
      * @param $afgehandeld
+     * @param $upDownVote
      */
-    public function __construct($id, $locatieId, $probleem, $datum, $afgehandeld)
+    public function __construct($id, $locatieId, $probleem, $datum, $afgehandeld, $upDownVote)
     {
         $this->id = $id;
         $this->locatieId = $locatieId;
         $this->probleem = $probleem;
         $this->datum = $datum;
         $this->afgehandeld=$afgehandeld;
+        $this->upDownVote = $upDownVote;
     }
 
     /**
@@ -110,6 +112,22 @@ class ProbleemMelding implements \JsonSerializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getUpDownVote()
+    {
+        return $this->UpDownVote;
+    }
+
+    /**
+     * @param mixed $UpDownVote
+     */
+    public function setUpDownVote($UpDownVote)
+    {
+        $this->UpDownVote = $UpDownVote;
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -123,7 +141,8 @@ class ProbleemMelding implements \JsonSerializable
             'locatieid' => $this->locatieId,
             'probleem' => $this->probleem,
             'datum' => $this->datum,
-            'afgehandeld' => $this->afgehandeld
+            'afgehandeld' => $this->afgehandeld,
+            'updownvote' => $this->upDownVote
         ];
     }
 }
