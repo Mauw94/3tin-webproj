@@ -14,4 +14,8 @@ interface ProbleemMeldingRepository
     public function updateProbleemMelding(ProbleemMelding $probleemMelding);
 
     public function getAfgehandeldeProbleemMeldingen ();
+
+    public function getUpDownVote (int $id);
+
+    public function updateUpDownVote (int $id, int $upDownVote);
 }

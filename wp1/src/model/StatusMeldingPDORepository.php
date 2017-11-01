@@ -47,6 +47,24 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
 
     }
 
+    public function getStatusByLocatieId(int $locatieId)
+    {
+        try {
+            $statement = $this->connection->prepare("SELECT * FROM statusmelding WHERE locatieid=?");
+            $statement->bindParam(1, $locatieId, \PDO::PARAM_INT);
+            $statement->setFetchMode(\PDO::FETCH_ASSOC);
+            $statement->execute();
+            $statusMelding = $statement->fetchAll();
+            if ($statusMelding > 0) {
+                return new StatusMelding($statusMelding[0]['id'],$statusMelding[0]['locatieid'],$statusMelding[0]['status'], $statusMelding[0]['datum']);
+            } else {
+                return null;
+            }
+        } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
     public function addStatusMelding(StatusMelding $statusMelding)
     {
         try {
@@ -62,6 +80,19 @@ class StatusMeldingPDORepository implements StatusMeldingRepository
 
             return $statusMelding;
         } catch (\Exception $exception) {
+            return null;
+        }
+    }
+
+    public function updateStatusmeldingByLocatie(int $locatieid, int $statusid)
+    {
+        try {
+            $statement = $this->connection->prepare('UPDATE statusmelding SET locatieid=? WHERE id=?');
+            $statement->bindParam(1, $locatieid, \PDO::PARAM_INT);
+            $statement->bindParam(2, $statusid, \PDO::PARAM_INT);
+            $statement->execute();
+        } catch (\Exception $exception) {
+            print $exception->getMessage();
             return null;
         }
     }
