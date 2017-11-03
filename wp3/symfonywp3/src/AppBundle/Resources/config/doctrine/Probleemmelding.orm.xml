@@ -16,5 +16,11 @@
     </field>
     <field name="datum" type="date" column="datum" nullable="false"/>
     <field name="afgehandeld" type="boolean" column="afgehandeld" nullable="false"/>
+    <field name="updownvote" type="integer" column="updownvote" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">0</option>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>

@@ -43,6 +43,13 @@ class Probleemmelding
     /**
      * @var integer
      *
+     * @ORM\Column(name="updownvote", type="integer")
+     */
+    private $updownvote;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
