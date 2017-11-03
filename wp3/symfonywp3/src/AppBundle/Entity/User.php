@@ -30,8 +30,6 @@ class User implements UserInterface, \Serializable
      */
     private $rolesString;
 
-//methodes uit UserInterface
-
     public function getUserName()
     {
         return $this->userName;

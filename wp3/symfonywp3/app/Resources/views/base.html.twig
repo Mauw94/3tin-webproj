@@ -45,7 +45,11 @@
 
                         {% if app.user %}
                             <li>
-                                <a>Logout</a>
+                                <a href="/quit">Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="/login">Login</a>
                             </li>
                         {% endif %}
                     </ul>
