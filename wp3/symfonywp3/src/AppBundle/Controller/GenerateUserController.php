@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\User;
-
 class GenerateUserController extends Controller
 {
     /**
@@ -16,7 +15,7 @@ class GenerateUserController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
             $user = new User();
-            $user->setUserName('admin1');
+            $user->setUsername('admin1');
             $user->setRolesString(
                 'ROLE_ADMIN ROLE_USER');
             $password = 'a1';
@@ -27,7 +26,9 @@ class GenerateUserController extends Controller
             $user->setPassword($encoded);
             $em->persist($user);
             $em->flush();
-            return new Response('Created user');
+            return $this->render('AppBundle:Security:login.html.twig', array(
+                // ...
+            ));
         }
     }
 }
