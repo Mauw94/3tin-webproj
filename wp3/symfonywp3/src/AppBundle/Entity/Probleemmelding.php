@@ -112,5 +112,55 @@ class Probleemmelding
     {
         return $this->id;
     }
+
+    /**
+     * @param int $locatieid
+     */
+    public function setLocatieid(int $locatieid)
+    {
+        $this->locatieid = $locatieid;
+    }
+
+    /**
+     * @param string $probleem
+     */
+    public function setProbleem(string $probleem)
+    {
+        $this->probleem = $probleem;
+    }
+
+    /**
+     * @param \DateTime $datum
+     */
+    public function setDatum(\DateTime $datum)
+    {
+        $this->datum = $datum;
+    }
+
+    /**
+     * @param bool $afgehandeld
+     */
+    public function setAfgehandeld(bool $afgehandeld)
+    {
+        $this->afgehandeld = $afgehandeld;
+    }
+
+    /**
+     * @param int $updownvote
+     */
+    public function setUpdownvote(int $updownvote)
+    {
+        $this->updownvote = $updownvote;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+
 }
 

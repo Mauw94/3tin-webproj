@@ -44,6 +44,14 @@ class Locatie
         return $this->id;
     }
 
+    /**
+     * @param string $naam
+     */
+    public function setNaam(string $naam)
+    {
+        $this->naam = $naam;
+    }
+
 
 }
 

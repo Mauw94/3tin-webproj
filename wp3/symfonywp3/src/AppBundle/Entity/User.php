@@ -1,14 +1,21 @@
 <?php
+
 namespace AppBundle\Entity;
-use Symfony\Component\Security\Core\User\UserInterface;
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
- * @ORM\Table("user")
- * @ORM\Entity
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
     /**
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -16,78 +23,61 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(name="userName", type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255)
      */
-    private $userName;
+    private $username;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
 
+
     /**
-     * @ORM\Column(name="rolesString", type="string", length=255)
+     * Get id
+     *
+     * @return int
      */
-    private $rolesString;
-
-    public function getUserName()
-    {
-        return $this->userName;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    public function getRoles()
-    {
-        return preg_split("/[\s,]+/",$this->rolesString);
-    }
-
-    public function getSalt()
-    {
-        return null;
-    }
-
-    //methodes uit Serializable
-
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->userName,
-            $this->password,
-            $this->rolesString
-        ));
-    }
-
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->userName,
-            $this->password,
-            $this->rolesString
-            ) = unserialize($serialized);
-    }
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function setUserName($userName)
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
     {
-        $this->userName = $userName;
+        $this->username = $username;
 
         return $this;
     }
 
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -95,23 +85,29 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function setRolesString($rolesString)
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
     {
-        $this->rolesString = $rolesString;
-
-        return $this;
+        return $this->password;
     }
 
-    public function getRolesString()
+    public function getRoles()
     {
-        return $this->rolesString;
+        return array('ROLE_USER');
     }
 
-    //toString
-    public function __toString()
+    public function eraseCredentials()
     {
-        return "Entity User, username= " . $this->userName;
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getSalt()
+    {
+        return null;
     }
 }
-
 
