@@ -13,7 +13,10 @@
             <th scope="col" class="text-center"><i class="fa fa-check"></i>Afgehandeld</th>
             <th scope="col">Score</th>
             <th scope="col">Beoordeel</th>
-            <th scope="col" class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
+            {% if is_granted('ROLE_WERKBEHEERDER') %}
+                <th scope="col" class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
+            {% endif %}
+
         </tr>
         </thead>
         <tbody>
@@ -47,13 +50,15 @@
                         <i>Nog niet beoordeelbaar.</i>
                     {% endif %}
                 </td>
-                <td class="text-center">
-                    <div class="item-actions">
-                        <a class="btn btn-sm btn-default">
-                            Toekennen Technicus
-                        </a>
-                    </div>
-                </td>
+                {% if is_granted('ROLE_WERKBEHEERDER') %}
+                    <td class="text-center">
+                        <div class="item-actions">
+                            <a class="btn btn-sm btn-default">
+                                Toekennen Technicus
+                            </a>
+                        </div>
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>

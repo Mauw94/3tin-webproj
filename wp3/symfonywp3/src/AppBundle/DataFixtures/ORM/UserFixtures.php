@@ -48,6 +48,20 @@ class UserFixtures implements FixtureInterface, ContainerAwareInterface
         $admin->setRolesString("ROLE_ADMIN ROLE_USER");
         $manager->persist($admin);
 
+        $werkbeheerder = new User();
+        $werkbeheerder->setUsername('werkbeheerder1');
+        $encodedPassword = $passwordEncoder->encodePassword($werkbeheerder, 'w1');
+        $werkbeheerder->setPassword($encodedPassword);
+        $werkbeheerder->setRolesString("ROLE_WERKBEHEERDER");
+        $manager->persist($werkbeheerder);
+
+        $technicus = new User();
+        $technicus->setUsername('technicus1');
+        $encodedPassword = $passwordEncoder->encodePassword($technicus, 't1');
+        $technicus->setPassword($encodedPassword);
+        $technicus->setRolesString("ROLE_TECHNICUS");
+        $manager->persist($technicus);
+
         $manager->flush();
     }
 
