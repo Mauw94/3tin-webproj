@@ -36,6 +36,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(name="rolesstring", type="string", length=255)
+     */
+    private $rolesstring;
+
 
     /**
      * Get id
@@ -97,8 +102,22 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return preg_split("/[\s,]+/",$this->rolesstring);
     }
+
+
+    public function setRolesString($rolesstring)
+    {
+        $this->rolesstring = $rolesstring;
+
+        return $this;
+    }
+
+    public function getRolesString()
+    {
+        return $this->rolesstring;
+    }
+
 
     public function eraseCredentials()
     {
