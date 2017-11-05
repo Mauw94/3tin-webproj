@@ -43,6 +43,9 @@
                             <li>
                                 <a href="/toegekendeProblemen">Toegekende problemen</a>
                             </li>
+                            <li>
+                                <a href="/showProbleemMeldingenTechnicus">Problemen toekennen</a>
+                            </li>
                         {% elseif   is_granted('ROLE_ADMIN')%}
                             <li>
                                 <a href="/addTechnicus">Add Technicus</a>
@@ -52,7 +55,7 @@
                             </li>
                         {% elseif is_granted('ROLE_WERKBEHEERDER') %}
                             <li>
-                                <a href="/showProbleemMeldingen">Technicus toekennen</a>
+                                <a href="/showProbleemMeldingen">ProbleemMeldingen toekennen</a>
                             </li>
                         {% endif %}
 

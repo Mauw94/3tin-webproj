@@ -40,4 +40,33 @@ class TechnicusController extends Controller
 
         return $this->redirectToRoute('probleemMeldingenTechnicus_show');
     }
+
+    /**
+     * @Route("/showProbleemMeldingenTechnicus", name="show_ProbleemMeldingenTechnicus")
+     */
+    public function showProbleemMeldingenAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $probleemMeldingen= $entityManager->getRepository(Probleemmelding::class)->findBy(
+            array('afgehandeld' => 0 , 'userid' => 0)
+        );
+        return $this->render('AppBundle:Technicus:show.html.twig', array(
+            'probleemMeldingen' => $probleemMeldingen
+        ));
+    }
+
+    /**
+     * @Route("/toekennenProbleemMelding/{id}" , requirements={"id": "\d+"}, name="toekennen_ProbleemMelding")
+     */
+    public function toekennenProbleemMeldingAction($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $probleemmelding = $entityManager->getRepository(Probleemmelding::class)->find($id);
+
+        $probleemmelding->setUserid($this->getUser()->getId());
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('show_ProbleemMeldingenTechnicus');
+    }
 }
