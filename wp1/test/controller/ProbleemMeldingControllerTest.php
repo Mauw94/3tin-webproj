@@ -24,7 +24,7 @@ class ProbleemMeldingControllerTest extends TestCase
 
     public function test_getById_probleemMeldingFound()
     {
-        $probleem = new ProbleemMelding(1, "test", "probleem", 19/19/2019, 0);
+        $probleem = new ProbleemMelding(1, "test", "probleem", 19/19/2019, 0 , 0);
         $this->mockProbleemMeldingRepo->expects($this->atLeastOnce())
             ->method('getById')
             ->will($this->returnValue($probleem));
@@ -43,7 +43,7 @@ class ProbleemMeldingControllerTest extends TestCase
 
     public function test_addProbleemMelding()
     {
-        $probleemMeldingJson = '{"id":0,"locatieid":"1","probleem":"Kapot","datum":"2017-10-11","afgehandeld":"1"}';
+        $probleemMeldingJson = '{"id":0,"locatieid":"1","probleem":"Kapot","datum":"2017-10-11","afgehandeld":"1","updownvote":"0"}';
         $probleemMelding = json_decode($probleemMeldingJson);
 
         $this->mockProbleemMeldingRepo->expects($this->atLeastOnce())->method('addProbleemMelding')
