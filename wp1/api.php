@@ -123,7 +123,7 @@ try {
     });
 
     $router->map('PUT', 'score/', function () use (&$scoreController, $requestBody) {
-        $scoreController->handleAddScoreByIdprobleemmelding($requestBody);
+        $scoreController->handleUpdateScoreByIdprobleemmelding($requestBody);
     });
 
     $match = $router->match();
