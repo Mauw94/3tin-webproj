@@ -13,6 +13,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Probleemmelding;
+use AppBundle\Entity\User;
 use AppBundle\Form\Type\DateTimePickerType;
 use AppBundle\Form\Type\TagsInputType;
 use Symfony\Component\Form\AbstractType;
@@ -24,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Defines the form used to create and manipulate blog posts.
  *
  */
-class ProbleemMeldingType extends AbstractType
+class UserType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -33,14 +34,11 @@ class ProbleemMeldingType extends AbstractType
     {
         $builder
 
-            ->add('locatieid', null, [
-                'attr' => ['autofocus' => true],
-                'label' => 'label.locatie_id',
+
+            ->add('username', null, [
+                'label' => 'label.username',
             ])
-            ->add('probleem', null, [
-                'label' => 'label.probleem',
-            ])
-            ->add('datum', DateTimePickerType::class, [
+            ->add('password', null, [
                 'label' => 'label.date',
             ]);
     }
@@ -51,7 +49,7 @@ class ProbleemMeldingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Probleemmelding::class,
+            'data_class' => User::class,
         ]);
     }
 }
