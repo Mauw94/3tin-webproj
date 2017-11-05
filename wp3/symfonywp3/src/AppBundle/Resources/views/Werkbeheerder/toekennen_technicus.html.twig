@@ -14,14 +14,14 @@
 
         {% for technicus in technicussen %}
             <tr>
-                <td>test</td>
+                <td>{{ technicus.username }}</td>
 
                 {% if is_granted('ROLE_WERKBEHEERDER') %}
                     <td class="text-center">
                         <div class="item-actions">
-                            <a class="btn btn-sm btn-default">
-                                Toekennen Technicus
-                            </a>
+                        <a href="/toekennenTechnicus/{{ probleemmeldingId }}/{{technicus.id}}" class="btn btn-sm btn-default">
+                                Toekennen
+                        </a>
                         </div>
                     </td>
                 {% endif %}

@@ -81,6 +81,19 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/deleteTechnicus/{id}" , requirements={"id": "\d+"}, name="delete_technicus")
+     */
+    public function deleteTechnicuseAction($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $technicus= $entityManager->getRepository(User::class)->find($id);
+        $entityManager->remove($technicus);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_technicussen');
+    }
+
     private function encodePassword(User $user, $plainPassword)
     {
         $passwordEncoder = $this->container->get('security.password_encoder');

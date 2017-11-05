@@ -50,6 +50,10 @@
                             <li>
                                 <a href="/showTechnicussen">List of technicussen</a>
                             </li>
+                        {% elseif is_granted('ROLE_WERKBEHEERDER') %}
+                            <li>
+                                <a href="/showProbleemMeldingen">Technicus toekennen</a>
+                            </li>
                         {% endif %}
 
                         {% if app.user %}
