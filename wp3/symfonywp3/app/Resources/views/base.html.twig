@@ -41,15 +41,14 @@
 
                         {% if is_granted('ROLE_TECHNICUS') %}
                             <li>
-
                                 <a href="/toegekendeProblemen">Toegekende problemen</a>
-
                             </li>
                         {% elseif   is_granted('ROLE_ADMIN')%}
                             <li>
-
                                 <a href="/addTechnicus">Add Technicus</a>
-
+                            </li>
+                            <li>
+                                <a href="/showTechnicussen">List of technicussen</a>
                             </li>
                         {% endif %}
 

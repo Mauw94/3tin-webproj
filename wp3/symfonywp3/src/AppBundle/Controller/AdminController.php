@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,12 +20,11 @@ class AdminController extends Controller
     public function addTechnicusAction(Request $request)
     {
         $user = new User();
-        $form = $this->createFormBuilder($user)
-            ->add('username', TextType::class)
-            ->add('password', PasswordType::class)
-            ->getForm();
+
+        $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
 
@@ -34,14 +34,54 @@ class AdminController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('/index');
+            return $this->redirectToRoute('homepage');
         }
         return $this->render('AppBundle:Admin:add_technicus.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
-    public function encodePassword(User $user, $plainPassword)
+    /**
+     * @Route("/showTechnicussen" , name="show_technicussen")
+     */
+    public function showTechnicusAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $technicussen= $entityManager->getRepository(User::class)->findBy(
+            array('rolesstring' => 'ROLE_TECHNICUS' )
+        );
+        return $this->render('AppBundle:Admin:showTechnicussen.html.twig', array(
+            'technicussen' => $technicussen
+        ));
+    }
+
+    /**
+     * @Route("/editTechnicus/{id}" , requirements={"id": "\d+"}, name="edit_technicus")
+     */
+    public function editTechnicusAction(Request $request, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $technicus= $entityManager->getRepository(User::class)->find($id);
+
+        $form = $this->createForm(UserType::class, $technicus);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $technicus->setPassword($this->encodePassword($technicus, $technicus->getPassword()));
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('show_technicussen');
+        }
+
+        return $this->render('AppBundle:Admin:edit_technicus.html.twig', [
+            'user' => $technicus,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    private function encodePassword(User $user, $plainPassword)
     {
         $passwordEncoder = $this->container->get('security.password_encoder');
         $encodedPassword = $passwordEncoder->encodePassword($user, $plainPassword);
