@@ -6,6 +6,7 @@ use AppBundle\Entity\Locatie;
 use AppBundle\Entity\Probleemmelding;
 use AppBundle\Entity\Score;
 use AppBundle\Entity\Statusmelding;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Psr\Log\LoggerInterface;
@@ -37,6 +38,7 @@ class LocatieController extends Controller
         $logger->info('Show Action location controller');
 
         $entityManager = $this->getDoctrine()->getManager();
+
         $probleemMeldingen= $entityManager->getRepository(Probleemmelding::class)->findBy(
             array('locatieid' => $id)
         );

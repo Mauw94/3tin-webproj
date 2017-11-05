@@ -50,6 +50,13 @@ class Probleemmelding
     /**
      * @var integer
      *
+     * @ORM\Column(name="userid", type="integer")
+     */
+    private $userid;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -159,6 +166,22 @@ class Probleemmelding
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserid(): int
+    {
+        return $this->userid;
+    }
+
+    /**
+     * @param int $userid
+     */
+    public function setUserid(int $userid)
+    {
+        $this->userid = $userid;
     }
 
 

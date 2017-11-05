@@ -53,7 +53,7 @@
                 {% if is_granted('ROLE_WERKBEHEERDER') %}
                     <td class="text-center">
                         <div class="item-actions">
-                            <a class="btn btn-sm btn-default">
+                            <a href="{{ path('show_technicus', {'id': probleemMelding.id}) }}"class="btn btn-sm btn-default">
                                 Toekennen Technicus
                             </a>
                         </div>
