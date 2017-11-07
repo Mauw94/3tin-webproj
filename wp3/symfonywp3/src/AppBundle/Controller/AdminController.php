@@ -34,14 +34,16 @@ class AdminController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Added new Technicus')
+                ->setFrom('send@example.com')
+                ->setTo('mauritsseelen@gmail.com')
+                ->setBody('Dit is een test. Kappa');
+            $this->get('mailer')->send($message);
+
             return $this->redirectToRoute('homepage');
         }
-
-        $message = \Swift_Message::newInstance()->setSubject('Added new Technicus')
-            ->setFrom('mauritsseelen@gmail.com')
-            ->setTo('mauritsseelen@gmail.com')
-            ->setBody($form);
-        $this->get('mailer')->send($message);
 
         return $this->render('AppBundle:Admin:add_technicus.html.twig', array(
             'form' => $form->createView()

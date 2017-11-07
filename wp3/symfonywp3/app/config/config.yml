@@ -62,9 +62,9 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: 'smtp'
-    encryption: 'ssl'
-    host: 'smtp.gmail.com'
+    transport: smtp
+    encryption: ssl
+    host: smtp.gmail.com
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
