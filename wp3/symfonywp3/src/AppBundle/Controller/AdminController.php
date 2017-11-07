@@ -25,7 +25,7 @@ class AdminController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
             $user->setPassword($this->encodePassword($user, $user->getPassword()));
@@ -36,6 +36,13 @@ class AdminController extends Controller
             $entityManager->flush();
             return $this->redirectToRoute('homepage');
         }
+
+        $message = \Swift_Message::newInstance()->setSubject('Added new Technicus')
+            ->setFrom('mauritsseelen@gmail.com')
+            ->setTo('mauritsseelen@gmail.com')
+            ->setBody($form);
+        $this->get('mailer')->send($message);
+
         return $this->render('AppBundle:Admin:add_technicus.html.twig', array(
             'form' => $form->createView()
         ));
@@ -47,8 +54,8 @@ class AdminController extends Controller
     public function showTechnicusAction()
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $technicussen= $entityManager->getRepository(User::class)->findBy(
-            array('rolesstring' => 'ROLE_TECHNICUS' )
+        $technicussen = $entityManager->getRepository(User::class)->findBy(
+            array('rolesstring' => 'ROLE_TECHNICUS')
         );
         return $this->render('AppBundle:Admin:showTechnicussen.html.twig', array(
             'technicussen' => $technicussen
@@ -62,7 +69,7 @@ class AdminController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $technicus= $entityManager->getRepository(User::class)->find($id);
+        $technicus = $entityManager->getRepository(User::class)->find($id);
 
         $form = $this->createForm(UserType::class, $technicus);
 
@@ -87,7 +94,7 @@ class AdminController extends Controller
     public function deleteTechnicuseAction($id)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $technicus= $entityManager->getRepository(User::class)->find($id);
+        $technicus = $entityManager->getRepository(User::class)->find($id);
         $entityManager->remove($technicus);
         $entityManager->flush();
 
