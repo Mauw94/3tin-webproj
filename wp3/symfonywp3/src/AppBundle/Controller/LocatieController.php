@@ -57,9 +57,11 @@ class LocatieController extends Controller
 
             }
 
+        $locatie = $entityManager->getRepository(Locatie::class)->find($id);
 
         return $this->render('AppBundle:Locatie:show_ProbleemMeldingen.html.twig', array(
-            'probleemMeldingen' => $probleemMeldingen
+            'probleemMeldingen' => $probleemMeldingen,
+            'locatie'=> $locatie
         ));
     }
 
@@ -77,8 +79,11 @@ class LocatieController extends Controller
             array('locatieid' => $id)
         )  ;
 
+        $locatie = $entityManager->getRepository(Locatie::class)->find($id);
+
         return $this->render('AppBundle:Locatie:show_StatusMeldingen.html.twig', array(
-            'statusMeldingen' => $statusMeldingen
+            'statusMeldingen' => $statusMeldingen,
+            'locatie'=> $locatie
         ));
 
     }
