@@ -34,18 +34,11 @@ class UserFixtures implements FixtureInterface, ContainerAwareInterface
     {
         $passwordEncoder = $this->container->get('security.password_encoder');
 
-        $user = new User();
-        $user->setUsername('user1');
-        $encodedPassword = $passwordEncoder->encodePassword($user, 'u1');
-        $user->setPassword($encodedPassword);
-        $user->setRolesString("ROLE_USER");
-        $manager->persist($user);
-
         $admin = new User();
         $admin->setUsername('admin1');
         $encodedPassword = $passwordEncoder->encodePassword($admin, 'a1');
         $admin->setPassword($encodedPassword);
-        $admin->setRolesString("ROLE_ADMIN ROLE_USER");
+        $admin->setRolesString("ROLE_ADMIN");
         $manager->persist($admin);
 
         $werkbeheerder = new User();

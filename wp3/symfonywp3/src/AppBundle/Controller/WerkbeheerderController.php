@@ -11,7 +11,7 @@ class WerkbeheerderController extends Controller
 {
 
     /**
-     * @Route("/showProbleemMeldingen", name="show_ProbleemMeldingen")
+     * @Route("/werkbeheerder_showProbleemMeldingen", name="show_ProbleemMeldingen")
      */
     public function showProbleemMeldingenAction()
     {
@@ -25,7 +25,7 @@ class WerkbeheerderController extends Controller
     }
 
     /**
-     * @Route("/showTechnicus/{id}" , requirements={"id": "\d+"}, name="show_technicus")
+     * @Route("/werkbeheerder_showTechnicus/{id}" , requirements={"id": "\d+"}, name="show_technicus")
      */
     public function showTechnicusAction($id)
     {
@@ -40,7 +40,7 @@ class WerkbeheerderController extends Controller
     }
 
     /**
-     * @Route("/toekennenTechnicus/{probleemmeldingId}/{technicusId}" , name="toekennen_technicus")
+     * @Route("/werkbeheerder_toekennenTechnicus/{probleemmeldingId}/{technicusId}" , name="toekennen_technicus")
      */
     public function ToekennenTechnicsAction($probleemmeldingId, $technicusId)
     {
@@ -55,7 +55,7 @@ class WerkbeheerderController extends Controller
     }
 
     /**
-     * @Route("/deleteTechnicusToekenning/{id}" , requirements={"id": "\d+"}, name="delete_TechnicusToekenning")
+     * @Route("/werkbeheerder_deleteTechnicusToekenning/{id}" , requirements={"id": "\d+"}, name="delete_TechnicusToekenning")
      */
     public function deleteTechnicusToekenningAction($id)
     {

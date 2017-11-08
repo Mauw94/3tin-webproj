@@ -41,21 +41,21 @@
 
                         {% if is_granted('ROLE_TECHNICUS') %}
                             <li>
-                                <a href="/toegekendeProblemen">Toegekende problemen</a>
+                                <a href="/technicus_toegekendeProblemen">Toegekende problemen</a>
                             </li>
                             <li>
-                                <a href="/showProbleemMeldingenTechnicus">Problemen toekennen</a>
+                                <a href="/technicus_showProbleemMeldingenTechnicus">Problemen toekennen</a>
                             </li>
                         {% elseif   is_granted('ROLE_ADMIN')%}
                             <li>
-                                <a href="/addTechnicus">Add Technicus</a>
+                                <a href="/admin_addTechnicus">Add Technicus</a>
                             </li>
                             <li>
-                                <a href="/showTechnicussen">List of technicussen</a>
+                                <a href="/admin_showTechnicussen">List of technicussen</a>
                             </li>
                         {% elseif is_granted('ROLE_WERKBEHEERDER') %}
                             <li>
-                                <a href="/showProbleemMeldingen">ProbleemMeldingen toekennen</a>
+                                <a href="/werkbeheerder_showProbleemMeldingen">ProbleemMeldingen toekennen</a>
                             </li>
                         {% endif %}
 

@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class TechnicusController extends Controller
 {
     /**
-     * @Route("/toegekendeProblemen" , name="probleemMeldingenTechnicus_show")
+     * @Route("/technicus_toegekendeProblemen" , name="probleemMeldingenTechnicus_show")
      */
     public function toegekendeProblemenAction()
     {
@@ -24,7 +24,7 @@ class TechnicusController extends Controller
     }
 
     /**
-     * @Route("/probleemAfhandelen/{id}" , requirements={"id": "\d+"}, name="probleemAfhandelen")
+     * @Route("/technicus_probleemAfhandelen/{id}" , requirements={"id": "\d+"}, name="probleemAfhandelen")
      */
     public function probleemAfhandelen($id)
     {
@@ -42,7 +42,7 @@ class TechnicusController extends Controller
     }
 
     /**
-     * @Route("/showProbleemMeldingenTechnicus", name="show_ProbleemMeldingenTechnicus")
+     * @Route("/technicus_showProbleemMeldingenTechnicus", name="show_ProbleemMeldingenTechnicus")
      */
     public function showProbleemMeldingenAction()
     {
@@ -56,7 +56,7 @@ class TechnicusController extends Controller
     }
 
     /**
-     * @Route("/toekennenProbleemMelding/{id}" , requirements={"id": "\d+"}, name="toekennen_ProbleemMelding")
+     * @Route("/technicus_toekennenProbleemMelding/{id}" , requirements={"id": "\d+"}, name="toekennen_ProbleemMelding")
      */
     public function toekennenProbleemMeldingAction($id)
     {

@@ -15,7 +15,7 @@ class AdminController extends Controller
 {
 
     /**
-     * @Route("/addTechnicus", name="addTechnicus")
+     * @Route("/admin_addTechnicus", name="addTechnicus")
      */
     public function addTechnicusAction(Request $request)
     {
@@ -51,7 +51,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/showTechnicussen" , name="show_technicussen")
+     * @Route("/admin_showTechnicussen" , name="show_technicussen")
      */
     public function showTechnicusAction()
     {
@@ -65,7 +65,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/editTechnicus/{id}" , requirements={"id": "\d+"}, name="edit_technicus")
+     * @Route("/admin_editTechnicus/{id}" , requirements={"id": "\d+"}, name="edit_technicus")
      */
     public function editTechnicusAction(Request $request, $id)
     {
@@ -91,7 +91,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/deleteTechnicus/{id}" , requirements={"id": "\d+"}, name="delete_technicus")
+     * @Route("/admin_deleteTechnicus/{id}" , requirements={"id": "\d+"}, name="delete_technicus")
      */
     public function deleteTechnicuseAction($id)
     {

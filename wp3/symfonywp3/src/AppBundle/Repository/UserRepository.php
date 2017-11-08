@@ -10,8 +10,5 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAll()
-    {
-        die("noooooooo");
-    }
+
 }
