@@ -19,7 +19,7 @@ class WerkbeheerderController extends Controller
         $probleemMeldingen= $entityManager->getRepository(Probleemmelding::class)->findBy(
             array('afgehandeld' => 0 )
         );
-        return $this->render('AppBundle:Werkbeheerder:show.html.twig', array(
+        return $this->render('AppBundle:Werkbeheerder:show_ProbleemMeldingen.html.twig', array(
             'probleemMeldingen' => $probleemMeldingen
         ));
     }

@@ -30,9 +30,9 @@ class LocatieController extends Controller
     }
 
     /**
-     * @Route("/showLocatie/{id}", requirements={"id": "\d+"}, name="locatie_show")
+     * @Route("/showProbleemMeldingen/{id}", requirements={"id": "\d+"}, name="probleemMeldingen_show")
      */
-    public function showAction($id,LoggerInterface $logger)
+    public function showProbleemMeldingenAction($id,LoggerInterface $logger)
     {
         //$logger = $this->get('logger');
         $logger->info('Show Action location controller');
@@ -42,10 +42,7 @@ class LocatieController extends Controller
         $probleemMeldingen= $entityManager->getRepository(Probleemmelding::class)->findBy(
             array('locatieid' => $id)
         );
-         $statusMeldingen = $entityManager->getRepository(Statusmelding::class)->findBy(
-             array('locatieid' => $id)
-         )  ;
-            $scores=[];
+           $scores=[];
             foreach ($probleemMeldingen as $probleem){
                 $score=$entityManager->getRepository(Score::class)->findBy(
                     array(
@@ -61,8 +58,26 @@ class LocatieController extends Controller
             }
 
 
-        return $this->render('AppBundle:Locatie:show.html.twig', array(
-            'probleemMeldingen' => $probleemMeldingen,
+        return $this->render('AppBundle:Locatie:show_ProbleemMeldingen.html.twig', array(
+            'probleemMeldingen' => $probleemMeldingen
+        ));
+    }
+
+    /**
+     * @Route("/showStatusMeldingenLocatie/{id}", requirements={"id": "\d+"}, name="statusMeldingen_show")
+     */
+    public function showStatusMeldingenAction($id,LoggerInterface $logger)
+    {
+        //$logger = $this->get('logger');
+        $logger->info('Show Action location controller');
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $statusMeldingen = $entityManager->getRepository(Statusmelding::class)->findBy(
+            array('locatieid' => $id)
+        )  ;
+
+        return $this->render('AppBundle:Locatie:show_StatusMeldingen.html.twig', array(
             'statusMeldingen' => $statusMeldingen
         ));
 

@@ -9,7 +9,7 @@
         <thead>
         <tr>
             <th scope="col">Locatie</th>
-            <th scope="col" class="text-right"><i class="fa fa-cogs" aria-hidden="true"></i> Acties</th>
+            <th scope="col" class="col-lg-5 text-center" ><i class="fa fa-cogs" aria-hidden="true"></i> Acties</th>
         </tr>
         </thead>
         <tbody>
@@ -19,8 +19,13 @@
 
                 <td class="text-right">
                     <div class="item-actions">
-                        <a href="{{ path('locatie_show', {'id': locatie.id}) }}" class="btn btn-sm btn-default">
-                            <i class="fa fa-eye" aria-hidden="true"></i> Show
+                        <a href="{{ path('probleemMeldingen_show', {'id': locatie.id}) }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-eye" aria-hidden="true"></i> Show ProbleemMeldingen
+                        </a>
+                        <i></i>
+                        <i></i>
+                        <a href="{{ path('statusMeldingen_show', {'id': locatie.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> Show StatusMeldingen
                         </a>
                     </div>
                 </td>

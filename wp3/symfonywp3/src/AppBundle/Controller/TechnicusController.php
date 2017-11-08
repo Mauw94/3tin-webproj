@@ -50,7 +50,7 @@ class TechnicusController extends Controller
         $probleemMeldingen= $entityManager->getRepository(Probleemmelding::class)->findBy(
             array('afgehandeld' => 0 , 'userid' => 0)
         );
-        return $this->render('AppBundle:Technicus:show.html.twig', array(
+        return $this->render('AppBundle:Technicus:show_ProbleemMeldingen.html.twig', array(
             'probleemMeldingen' => $probleemMeldingen
         ));
     }
