@@ -10,22 +10,33 @@ use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class LocatieController extends Controller
 {
     /**
      * @Route("/index")
      */
-    public function indexAction(LoggerInterface $logger)
+    public function indexAction(Request $request, LoggerInterface $logger)
     {
         //$logger = $this->get('logger');
         $logger->info('Location constructor');
 
         $entityManager = $this->getDoctrine()->getManager();
-        $locaties= $entityManager->getRepository(Locatie::class)->findAll();
+
+        $dql = "SELECT bp FROM AppBundle:Locatie bp";
+        $query = $entityManager->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit',8)
+        );
+
 
         return $this->render('AppBundle:Locatie:index.html.twig', array(
-            'locaties' => $locaties
+            'locaties' => $result
         ));
     }
 
