@@ -1,13 +1,13 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}AppBundle:Locatie:show{% endblock %}
-            <th scope="col">Picture</th>
 {% block body %}
     <h1>Technicussen</h1>
 
     <table class="table table-striped table-middle-aligned">
         <thead>
         <tr>
+            <th scope="col">Picture</th>
             <th scope="col">Naam</th>
             {% if is_granted('ROLE_ADMIN') %}
                 <th scope="col" class="col-lg-2"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
@@ -20,7 +20,10 @@
         {% for technicus in technicussen %}
             <tr>
                 <td>
-
+                    {% image '@AppBundle/Resources/public/pictures/29cba6d90193a07f183a551e0ac1e1f6.jpeg'
+                        filter='jpegoptim' output='/pictures/29cba6d90193a07f183a551e0ac1e1f6.jpeg' %}
+                    <img src="{{ asset_url }}" alt="Example"/>
+                    {% endimage %}
                 </td>
 
                 <td>{{ technicus.username }}</td>

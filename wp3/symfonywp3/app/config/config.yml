@@ -7,7 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    pictures_directory: '%kernel.project_dir%/public/uploads/pictures'
+    pictures_directory: '%kernel.project_dir%/src/AppBundle/Resources/public/pictures'
 
 framework:
     #esi: ~
@@ -99,3 +99,9 @@ knp_paginator:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v3_pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
+
+assetic:
+    filters:
+        jpegoptim:
+            bin: path/to/jpegoptim
+         

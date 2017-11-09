@@ -18,6 +18,8 @@ class AppKernel extends Kernel
 
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+
             new AppBundle\AppBundle(),
         ];
 
