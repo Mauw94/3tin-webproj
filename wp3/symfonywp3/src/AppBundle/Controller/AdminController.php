@@ -28,6 +28,23 @@ class AdminController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
+            // $file stores the uploaded JPG file
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $user->getPicture();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where JPG are stored
+            $file->move(
+                $this->getParameter('pictures_directory'),
+                $fileName
+            );
+
+            // Update the 'picture' property to store the JPG file name
+            // instead of its contents
+            $user->setPicture($fileName);
+
             $user->setPassword($this->encodePassword($user, $user->getPassword()));
             $user->setRolesString('ROLE_TECHNICUS');
 

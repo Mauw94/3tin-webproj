@@ -19,5 +19,10 @@
         <option name="fixed"/>
       </options>
     </field>
+    <field name="picture" type="string" column="picture" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
   </entity>
 </doctrine-mapping>
