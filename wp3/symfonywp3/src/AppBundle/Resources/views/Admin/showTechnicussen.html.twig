@@ -8,9 +8,9 @@
         <thead>
         <tr>
             <th scope="col">Picture</th>
-            <th scope="col">Naam</th>
+            <th scope="col" class="text-left" >Naam</th>
             {% if is_granted('ROLE_ADMIN') %}
-                <th scope="col" class="col-lg-2"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
+                <th scope="col" class="text-right"><i class="fa fa-cogs" aria-hidden="true"></i> Actions</th>
             {% endif %}
 
         </tr>
@@ -20,26 +20,27 @@
         {% for technicus in technicussen %}
             <tr>
                 <td>
-                    {% image '@AppBundle/Resources/public/pictures/29cba6d90193a07f183a551e0ac1e1f6.jpeg'
-                        filter='jpegoptim' output='/pictures/29cba6d90193a07f183a551e0ac1e1f6.jpeg' %}
-                    <img src="{{ asset_url }}" alt="Example"/>
-                    {% endimage %}
+                    {% if technicus.picture != null %}
+                        <img style="height: 70px; width: auto;" src="{{ asset("bundles/app/pictures/") ~ technicus.picture  }} " alt="test" />
+                    {% endif %}
                 </td>
 
-                <td>{{ technicus.username }}</td>
+                <td class="text-left">{{ technicus.username }}</td>
 
                 {% if is_granted('ROLE_ADMIN') %}
-                    <td class="col">
+                    <td class="col text-right">
                         <div class="item-actions">
                             <a href="{{ path('edit_technicus', {id: technicus.id}) }}" class="btn btn-sm btn-default">
                                 <i class="fa fa-edit" aria-hidden="true"></i> Edit
                             </a>
-
-                            <a href="{{ path('delete_technicus', {id: technicus.id}) }}" class="btn btn-sm btn-danger">
-                                <i class="fa fa-trash" aria-hidden="true"></i> Delete
-                            </a>
+                            <td>
+                                {{ include('Delete/_delete_form.html.twig', {technicus: technicus}, with_context = false) }}
+                            </td>
                         </div>
+
+
                     </td>
+
                 {% endif %}
             </tr>
         {% else %}
