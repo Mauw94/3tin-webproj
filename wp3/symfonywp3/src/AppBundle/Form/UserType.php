@@ -44,7 +44,10 @@ class UserType extends AbstractType
                 'second_options' => array('label' => 'Repeat Password'),
                 'type' => PasswordType::class
             ))
-            ->add('picture', FileType::class, array('label' => 'Picture (JPG file)'))
+            ->add('picture', FileType::class, array(
+                'label' => 'Picture (JPG file)',
+
+            ))
         ;
     }
 

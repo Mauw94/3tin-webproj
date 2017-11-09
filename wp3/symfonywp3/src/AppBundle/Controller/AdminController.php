@@ -89,12 +89,29 @@ class AdminController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         $technicus = $entityManager->getRepository(User::class)->find($id);
-
+        $technicus->setPicture("");
         $form = $this->createForm(UserType::class, $technicus);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // $file stores the uploaded JPG file
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $technicus->getPicture();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where JPG are stored
+            $file->move(
+                $this->getParameter('pictures_directory'),
+                $fileName
+            );
+
+            // Update the 'picture' property to store the JPG file name
+            // instead of its contents
+            $technicus->setPicture($fileName);
 
             $technicus->setPassword($this->encodePassword($technicus, $technicus->getPassword()));
             $this->getDoctrine()->getManager()->flush();
