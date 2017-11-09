@@ -45,7 +45,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
      * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $picture;
@@ -65,9 +64,6 @@ class User implements UserInterface
     {
         $this->picture = $picture;
     }
-
-
-
 
     /**
      * Get id

@@ -7,8 +7,7 @@ use AppBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 class AdminController extends Controller
@@ -21,7 +20,11 @@ class AdminController extends Controller
     {
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user)
+            ->add('picture', FileType::class, array(
+                'label' => 'Picture (JPG file)'
+            ))
+        ;
 
         $form->handleRequest($request);
 
@@ -89,8 +92,14 @@ class AdminController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         $technicus = $entityManager->getRepository(User::class)->find($id);
+        $tmpPicture = $technicus->getPicture();
         $technicus->setPicture("");
-        $form = $this->createForm(UserType::class, $technicus);
+        $form = $this->createForm(UserType::class, $technicus)
+            ->add('picture', FileType::class, array(
+                'label' => 'Picture (JPG file)',
+                'required' => false
+            ));
+
 
         $form->handleRequest($request);
 
@@ -98,20 +107,25 @@ class AdminController extends Controller
 
             // $file stores the uploaded JPG file
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $technicus->getPicture();
+            if ($technicus->getPicture() != ""){
+                $file = $technicus->getPicture();
 
-            // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                // Generate a unique name for the file before saving it
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-            // Move the file to the directory where JPG are stored
-            $file->move(
-                $this->getParameter('pictures_directory'),
-                $fileName
-            );
+                // Move the file to the directory where JPG are stored
+                $file->move(
+                    $this->getParameter('pictures_directory'),
+                    $fileName
+                );
 
-            // Update the 'picture' property to store the JPG file name
-            // instead of its contents
-            $technicus->setPicture($fileName);
+                // Update the 'picture' property to store the JPG file name
+                // instead of its contents
+                $technicus->setPicture($fileName);
+            } else {
+                $technicus->setPicture($tmpPicture);
+            }
+
 
             $technicus->setPassword($this->encodePassword($technicus, $technicus->getPassword()));
             $this->getDoctrine()->getManager()->flush();

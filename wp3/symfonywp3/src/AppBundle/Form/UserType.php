@@ -17,7 +17,6 @@ use AppBundle\Entity\User;
 use AppBundle\Form\Type\DateTimePickerType;
 use AppBundle\Form\Type\TagsInputType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -43,10 +42,6 @@ class UserType extends AbstractType
                 'first_options' => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
                 'type' => PasswordType::class
-            ))
-            ->add('picture', FileType::class, array(
-                'label' => 'Picture (JPG file)',
-
             ))
         ;
     }
