@@ -134,8 +134,10 @@ try {
     }
 
 }catch(\PDOException $e) {
+    header("HTTP/1.0 500 Server Error");
     print('Something went wrong with the database.'.$e);
 }catch (\InvalidArgumentException $e){
+    header("HTTP/1.0 422 Invalid arguments");
     print('Invalid arguments were provided.'.$e);
 }
 catch (\Exception $e) {
