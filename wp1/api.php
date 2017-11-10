@@ -133,6 +133,11 @@ try {
         echo 'Something went wrong with the routing.';
     }
 
-} catch (\Exception $e) {
+}catch(\PDOException $e) {
+    print('Something went wrong with the database.'.$e);
+}catch (\InvalidArgumentException $e){
+    print('Invalid arguments were provided.'.$e);
+}
+catch (\Exception $e) {
     print('Connection failed ' . $e);
 }
