@@ -132,15 +132,14 @@ try {
     } else {
         echo 'Something went wrong with the routing.';
     }
-
-}catch(\PDOException $e) {
+} catch (\PDOException $e) {
     header("HTTP/1.0 503 Service Unavailable");
-    print('Something went wrong with the database.'.$e);
-}catch (\InvalidArgumentException $e){
+    print('Something went wrong with the database. <br>' . $e);
+} catch (\InvalidArgumentException $e) {
     header("HTTP/1.0 422 Invalid arguments");
-    print('Invalid arguments were provided.'.$e);
+    print('Invalid arguments were provided.<br>' . $e);
 }
 catch (\Exception $e) {
-    header("HTTP/1.0 500 Internal Server Error");
-    print('Connection failed ' . $e);
+    header("HTTP/1.0 ".$e->getCode()." Internal Server Error");
+    print('Connection failed ' . $e->getCode());
 }
