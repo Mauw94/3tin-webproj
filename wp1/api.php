@@ -11,6 +11,7 @@ use controller\ProbleemMeldingController;
 use controller\LocatieController;
 use controller\ScoreController;
 use model\ScorePDORepository;
+use controller\Errorcontroller;
 
 $container = require __DIR__ . '/src/app/container.php';
 $pdo = null;
@@ -131,13 +132,15 @@ try {
         echo 'Something went wrong with the routing.';
     }
 } catch (\PDOException $e) {
-    header("HTTP/1.0 503 Service Unavailable");
-    print('Something went wrong with the database. <br>' . $e);
-} catch (\InvalidArgumentException $e) {
+    $jsonView = new JsonView();
+    $errorController = new ErrorController($this->$jsonView);
+    $errorController->showError($e);
+}
+/* catch (\InvalidArgumentException $e) {
     header("HTTP/1.0 422 Invalid arguments");
     print('Invalid arguments were provided.<br>' . $e);
 }
 catch (\Exception $e) {
     header("HTTP/1.0 ".$e->getCode()." Internal Server Error");
     print('Connection failed ' . $e->getCode());
-}
+}*/
