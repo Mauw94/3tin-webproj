@@ -57,9 +57,9 @@ class AdminController extends Controller
 
             $message = \Swift_Message::newInstance()
                 ->setSubject('Added Technicus')
-                ->setFrom('dummyPXL@hotmail.com')
-                ->setTo('dummyPXL@hotmail.com')
-                ->setBody('Added Technicus');
+                ->setFrom('dummy@example.com')
+                ->setTo('schooldemo@blackturtle.eu')
+                ->setBody('You created a technicus with name: ' . $user->getUsername());
             $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('homepage');
