@@ -21,7 +21,7 @@ class JsonView implements View
 
     public function error(\Exception $e){
         header("HTTP/1.0 ".$e->getCode()." Internal Server Error");
-        print('Error: ' . $e->getCode());
+        print('{Error: ' . $e->getCode().'}');
     }
 
 }
