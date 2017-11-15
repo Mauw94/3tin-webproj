@@ -11,6 +11,7 @@ class ProbleemMelding implements \JsonSerializable
     private $datum;
     private $afgehandeld;
     private $updownvote;
+    private $userId;
 
     /**
      * ProbleemMelding constructor.
@@ -21,7 +22,7 @@ class ProbleemMelding implements \JsonSerializable
      * @param $afgehandeld
      * @param $updownvote
      */
-    public function __construct($id, $locatieid, $probleem, $datum, $afgehandeld, $updownvote)
+    public function __construct($id, $locatieid, $probleem, $datum, $afgehandeld, $updownvote, $userId)
     {
         $this->id = $id;
         $this->locatieid = $locatieid;
@@ -29,6 +30,7 @@ class ProbleemMelding implements \JsonSerializable
         $this->datum = $datum;
         $this->afgehandeld = $afgehandeld;
         $this->updownvote = $updownvote;
+        $this->userId = $userId;
     }
 
     /**
@@ -77,6 +79,22 @@ class ProbleemMelding implements \JsonSerializable
     public function setProbleem($probleem)
     {
         $this->probleem = $probleem;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param mixed $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
     }
 
     /**
@@ -136,7 +154,8 @@ class ProbleemMelding implements \JsonSerializable
             "probleem" => $this->probleem,
             "datum" => $this->datum,
             "afgehandeld" => $this->afgehandeld,
-            "updownvote" => $this->updownvote
+            "updownvote" => $this->updownvote,
+            "userid" => $this->userId
         ];
     }
 }

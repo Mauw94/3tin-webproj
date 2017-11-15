@@ -101,13 +101,15 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $datum = $probleemMelding->getDatum();
             $afgehandeld = $probleemMelding->getAfgehandeld();
             $upDownVote = $probleemMelding->getUpDownVote();
-            $statement = $this->connection->prepare('UPDATE probleemmelding SET locatieid=?,probleem=?,datum=?,afgehandeld=?,updownvote=? WHERE id=?');
+            $userId = $probleemMelding->getUserId();
+            $statement = $this->connection->prepare('UPDATE probleemmelding SET locatieid=?,probleem=?,datum=?,afgehandeld=?,updownvote=?, userid=? WHERE id=?');
             $statement->bindParam(1, $locatieId, \PDO::PARAM_INT);
             $statement->bindParam(2, $probleem, \PDO::PARAM_STR);
             $statement->bindParam(3, $datum, \PDO::PARAM_STR);
             $statement->bindParam(4, $afgehandeld, \PDO::PARAM_BOOL);
             $statement->bindParam(5,$upDownVote,\PDO::PARAM_INT);
             $statement->bindParam(6, $id, \PDO::PARAM_INT);
+            $statement->bindParam(7, $userId, \PDO::PARAM_INT);
             $statement->execute();
 
             return $probleemMelding;
