@@ -76,13 +76,15 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $datum = $probleemMelding->getDatum();
             $afgehandeld = $probleemMelding->getAfgehandeld();
             $upDownVote = $probleemMelding->getUpDownVote();
-            $statement = $this->connection->prepare('INSERT INTO probleemmelding(id, locatieid, probleem, datum, afgehandeld, updownvote) VALUES(?,?,?,?,?,?)');
+            $userId = $probleemMelding->getUserId();
+            $statement = $this->connection->prepare('INSERT INTO probleemmelding(id, locatieid, probleem, datum, afgehandeld, updownvote, userid) VALUES(?,?,?,?,?,?)');
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->bindParam(2, $locatieId, \PDO::PARAM_INT);
             $statement->bindParam(3, $probleem, \PDO::PARAM_STR);
             $statement->bindParam(4, $datum, \PDO::PARAM_STR);
             $statement->bindParam(5, $afgehandeld, \PDO::PARAM_BOOL);
-            $statement->bindParam(6, $upDownVote,\PDO::PARAM_INT);
+            $statement->bindParam(6, $upDownVote,\PDO::PARAM_STR);
+            $statement->bindParam(7, $userId, \PDO::PARAM_INT);
 
             $statement->execute();
             return $probleemMelding;
@@ -107,9 +109,9 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $statement->bindParam(2, $probleem, \PDO::PARAM_STR);
             $statement->bindParam(3, $datum, \PDO::PARAM_STR);
             $statement->bindParam(4, $afgehandeld, \PDO::PARAM_BOOL);
-            $statement->bindParam(5,$upDownVote,\PDO::PARAM_INT);
-            $statement->bindParam(6, $id, \PDO::PARAM_INT);
-            $statement->bindParam(7, $userId, \PDO::PARAM_INT);
+            $statement->bindParam(5,$upDownVote,\PDO::PARAM_STR);
+            $statement->bindParam(6, $userId, \PDO::PARAM_INT);
+            $statement->bindParam(7, $id, \PDO::PARAM_INT);
             $statement->execute();
 
             return $probleemMelding;
