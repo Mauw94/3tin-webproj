@@ -84,22 +84,6 @@ class ProbleemMelding implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @param mixed $userId
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getDatum()
     {
         return $this->datum;
@@ -145,17 +129,32 @@ class ProbleemMelding implements \JsonSerializable
         $this->updownvote = $updownvote;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param mixed $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+    }
 
     public function jsonSerialize()
     {
         return [
-            "id" => $this->id,
-            "locatieid" => $this->locatieid,
-            "probleem" => $this->probleem,
-            "datum" => $this->datum,
-            "afgehandeld" => $this->afgehandeld,
-            "updownvote" => $this->updownvote,
-            "userid" => $this->userId
+            'id' => $this->id,
+            'locatieid' => $this->locatieid,
+            'probleem' => $this->probleem,
+            'datum' => $this->datum,
+            'afgehandeld' => $this->afgehandeld,
+            'updownvote' => $this->updownvote,
+            'userid' => $this->userId
         ];
     }
 }

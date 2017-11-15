@@ -40,7 +40,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             if ($probleemMelding > 0) {
                 return new ProbleemMelding($probleemMelding[0]['id'],$probleemMelding[0]['locatieid'],
                     $probleemMelding[0]['probleem'], $probleemMelding[0]['datum'],
-                    $probleemMelding[0]['afgehandeld'],$probleemMelding[0]['updownvote']);
+                    $probleemMelding[0]['afgehandeld'],$probleemMelding[0]['updownvote'], $probleemMelding[0]['userid']);
             } else {
                 return null;
             }
@@ -77,7 +77,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $afgehandeld = $probleemMelding->getAfgehandeld();
             $upDownVote = $probleemMelding->getUpDownVote();
             $userId = $probleemMelding->getUserId();
-            $statement = $this->connection->prepare('INSERT INTO probleemmelding(id, locatieid, probleem, datum, afgehandeld, updownvote, userid) VALUES(?,?,?,?,?,?)');
+            $statement = $this->connection->prepare('INSERT INTO probleemmelding(id, locatieid, probleem, datum, afgehandeld, updownvote, userid) VALUES(?,?,?,?,?,?,?)');
             $statement->bindParam(1, $id, \PDO::PARAM_INT);
             $statement->bindParam(2, $locatieId, \PDO::PARAM_INT);
             $statement->bindParam(3, $probleem, \PDO::PARAM_STR);
@@ -85,7 +85,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $statement->bindParam(5, $afgehandeld, \PDO::PARAM_BOOL);
             $statement->bindParam(6, $upDownVote,\PDO::PARAM_STR);
             $statement->bindParam(7, $userId, \PDO::PARAM_INT);
-
+            
             $statement->execute();
             return $probleemMelding;
         } catch (\Exception $exception) {
@@ -104,12 +104,12 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $afgehandeld = $probleemMelding->getAfgehandeld();
             $upDownVote = $probleemMelding->getUpDownVote();
             $userId = $probleemMelding->getUserId();
-            $statement = $this->connection->prepare('UPDATE probleemmelding SET locatieid=?,probleem=?,datum=?,afgehandeld=?,updownvote=?, userid=? WHERE id=?');
+            $statement = $this->connection->prepare('UPDATE probleemmelding SET locatieid=?,probleem=?,datum=?,afgehandeld=?,updownvote=?,userid=? WHERE id=?');
             $statement->bindParam(1, $locatieId, \PDO::PARAM_INT);
             $statement->bindParam(2, $probleem, \PDO::PARAM_STR);
             $statement->bindParam(3, $datum, \PDO::PARAM_STR);
             $statement->bindParam(4, $afgehandeld, \PDO::PARAM_BOOL);
-            $statement->bindParam(5,$upDownVote,\PDO::PARAM_STR);
+            $statement->bindParam(5, $upDownVote,\PDO::PARAM_STR);
             $statement->bindParam(6, $userId, \PDO::PARAM_INT);
             $statement->bindParam(7, $id, \PDO::PARAM_INT);
             $statement->execute();

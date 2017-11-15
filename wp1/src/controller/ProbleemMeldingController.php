@@ -36,7 +36,7 @@ class ProbleemMeldingController
     public function handleUpdateProbleemMelding($probleemMelding)
     {
         $decode = json_decode($probleemMelding, true);
-        $newProbleemMelding = new ProbleemMelding((int)$decode['id'], $decode['locatieid'], $decode['probleem'], $decode['datum'], $decode['afgehandeld']);
+        $newProbleemMelding = new ProbleemMelding((int)$decode['id'], $decode['locatieid'], $decode['probleem'], $decode['datum'], $decode['afgehandeld'], $decode['updownvote'], $decode['userid']);
         $this->probleemMeldingRepo->updateProbleemmelding($newProbleemMelding);
         $this->view->show(['toShow' => $newProbleemMelding]);
     }
@@ -44,7 +44,7 @@ class ProbleemMeldingController
     public function handleAddProbleemMelding($probleemMelding)
     {
         $decode = json_decode($probleemMelding, true);
-        $newProbleemMelding = new ProbleemMelding((int)$decode['id'], $decode['locatieid'], $decode['probleem'], $decode['datum'], $decode['afgehandeld'], $decode['updownvote']);
+        $newProbleemMelding = new ProbleemMelding((int)$decode['id'], $decode['locatieid'], $decode['probleem'], $decode['datum'], $decode['afgehandeld'], $decode['updownvote'], $decode['userid']);
         $this->probleemMeldingRepo->addProbleemMelding($newProbleemMelding);
         $this->view->show(['toShow' => $newProbleemMelding]);
     }
