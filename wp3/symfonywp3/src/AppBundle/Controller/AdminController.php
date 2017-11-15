@@ -56,10 +56,10 @@ class AdminController extends Controller
             $entityManager->flush();
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Added new Technicus')
-                ->setFrom('send@example.com')
-                ->setTo('mauritsseelen@gmail.com')
-                ->setBody('Dit is een test. Kappa');
+                ->setSubject('Added Technicus')
+                ->setFrom('dummy@example.com')
+                ->setTo('schooldemo@blackturtle.eu')
+                ->setBody('You created a technicus with name: ' . $user->getUsername());
             $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('homepage');
