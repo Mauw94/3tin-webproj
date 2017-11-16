@@ -85,7 +85,7 @@ class ProbleemMeldingPDORepository implements ProbleemMeldingRepository
             $statement->bindParam(5, $afgehandeld, \PDO::PARAM_BOOL);
             $statement->bindParam(6, $upDownVote,\PDO::PARAM_STR);
             $statement->bindParam(7, $userId, \PDO::PARAM_INT);
-            
+
             $statement->execute();
             return $probleemMelding;
         } catch (\Exception $exception) {
