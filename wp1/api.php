@@ -17,7 +17,9 @@ $container = require __DIR__ . '/src/app/container.php';
 $pdo = null;
 
 try {
-
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     $dbinfo = json_decode(file_get_contents('dbconnection.json'), true);
     $pdo = new PDO($dbinfo['dsn'], $dbinfo['username'], $dbinfo['password']);
@@ -132,8 +134,9 @@ try {
         echo 'Something went wrong with the routing.';
     }
 } catch (\PDOException $e) {
+    echo $e;
     $jsonView = new JsonView();
-    $errorController = new ErrorController($this->$jsonView);
+    $errorController = new ErrorController($jsonView);
     $errorController->showError($e);
 }
 /* catch (\InvalidArgumentException $e) {
